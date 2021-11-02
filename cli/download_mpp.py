@@ -15,8 +15,8 @@ def download_mpp(args):
     tm_client = get_tm_client(tm_credentials, experiment_name)
     DATA_CONFIG = get_data_config(params.data_config)
     
-    for well in params['well_names']:
-        cur_dir = os.path.join(DATA_CONFIG.DATA_DIR, params['out_dir'], well)
+    for well in download_params['well_names']:
+        cur_dir = os.path.join(DATA_CONFIG.DATA_DIR, download_params['out_dir'], well)
         if not os.path.exists(cur_dir):
             os.makedirs(cur_dir)
         # get metadata
@@ -40,7 +40,7 @@ def download_mpp(args):
                                   experiment_name=experiment_name,
                                   channel_names=download_params['channels'],
                                   mean_object_size=download_params['size'])
-        mcu.mpp.main(mpp_args)
+        #mcu.mpp.main(mpp_args)
 
 def parse_arguments():
     parser = argparse.ArgumentParser(

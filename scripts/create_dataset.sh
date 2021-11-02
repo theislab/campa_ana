@@ -15,7 +15,7 @@
 
 # run script
 CUR_DIR=$(dirname $0)
-SCRIPT=$CUR_DIR/../cli/create_dataset.py
+SCRIPT=$CUR_DIR/../../miann/cli/create_dataset.py
 
-python $SCRIPT $CUR_DIR/params/data_params_all.py
+python $SCRIPT $CUR_DIR/../params/data_params_all.py
 
