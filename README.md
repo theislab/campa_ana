@@ -4,5 +4,5 @@ We provide both data and pre-trained models described in the paper.
 
 # Setup
 - install miann + miann_ana
-- download data
+- download data + models
 - change config.ini to point to data
