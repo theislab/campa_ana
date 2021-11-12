@@ -2,22 +2,22 @@ from miann.tl import LossEnum, ModelEnum
 
 base_config = {
     'experiment': {
-        'dir': 'VAE_all',
+        'dir': 'VAE_SBF2',
         'name': None,
         'save_config': True,
     },
     'data': {
         'load_dataset': True,
         'data_config': 'NascentRNA',
-        'dataset_name': '184A1_all_frac0005_neigh3_cond_pert-CC',
+        'dataset_name': '184A1_SBF2_frac005_neigh3_cond_siRNA-CC',
         'output_channels': None,
     },
     'model': {
         'model_cls': None,
         'model_kwargs': {
             'num_neighbors': 3,
-            'num_channels': 34,
-            'num_output_channels': 34,
+            'num_channels': 43,
+            'num_output_channels': 43,
             'latent_dim': 16,
             # encoder definition
             'encoder_conv_layers': [32],
@@ -31,8 +31,8 @@ base_config = {
         'init_with_weights': False,
     },
     'training': {
-        'learning_rate': 0.001,
-        'epochs': 25,
+        'learning_rate': 0.0001,
+        'epochs': 15,
         'batch_size': 128,
         'loss': {'decoder': LossEnum.SIGMA_MSE, 'latent': LossEnum.KL},
         'metrics': {'decoder': LossEnum.MSE_metric, 'latent': LossEnum.KL},
@@ -70,11 +70,11 @@ variable_config = [
     },
     # conditional model
     {
-        'experiment': {'name': 'CondVAE_pert-CC'},
+        'experiment': {'name': 'CondVAE_siRNA-CC'},
         'model': {
             'model_cls': ModelEnum.VAEModel,
             'model_kwargs': {
-                'num_conditions': 14,
+                'num_conditions': 6,
                 'encode_condition': [10,10],
             },
         },

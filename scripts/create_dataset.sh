@@ -5,17 +5,18 @@
 #SBATCH -J create_dataset
 #SBATCH -p cpu_p
 #SBATCH -c 1
-#SBATCH --mem-per-cpu 89G
+#SBATCH --mem-per-cpu 255G
 #SBATCH -t 8:00:00
 #SBATCH --nice=10000
 
 # set up
-#source ~/.bashrc
-#conda activate pelkmans-3.9
+source ~/.bashrc
+conda activate pelkmans-3.9
 
 # run script
-CUR_DIR=$(dirname $0)
-SCRIPT=$CUR_DIR/../../miann/cli/create_dataset.py
+BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
+SCRIPT=$BASE/miann/cli/create_dataset.py
 
-python $SCRIPT $CUR_DIR/../params/data_params_all.py
+#python $SCRIPT $BASE/miann_ana/params/data_params_all.py
+python $SCRIPT $BASE/miann_ana/params/data_params_SBF2.py
 
