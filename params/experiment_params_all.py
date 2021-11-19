@@ -41,7 +41,7 @@ base_config = {
         'save_history': True,
         'overwrite_history': True,
     },
-    'evaluation': { # TODO change this to fit to aggregation params
+    'evaluation': {
         'split': 'val',
         'predict_reps': ['latent', 'decoder'],
         'img_ids': 25,
@@ -78,5 +78,19 @@ variable_config = [
                 'encode_condition': [10,10],
             },
         },
-    }, 
+    },
+    # MPPleiden model (non-trainable)
+    {
+        'experiment': {'name': 'MPPleiden'},
+        'model': None,
+        'training': None,
+        'evaluation': {
+            'predict_reps':[], 
+            'predict_imgs': False
+        },
+        'cluster': {
+            'cluster_rep': 'mpp', 
+            'leiden_resolution': 2
+        },
+    },
 ]

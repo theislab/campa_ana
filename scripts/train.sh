@@ -20,6 +20,13 @@ conda activate pelkmans-3.9
 BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
 SCRIPT=$BASE/miann/cli/train.py
 
-#python $SCRIPT all --config $BASE/miann_ana/params/experiment_params_all.py
-python $SCRIPT trainval --experiment-dir VAE_SBF2 --exp-name VAE #--config $BASE/miann_ana/params/experiment_params_SBF2.py
-#python $SCRIPT evaluate --experiment-dir VAE_all #VAE_SBF2
+# train, evaluate, and compare all experiments
+python $SCRIPT all --config $BASE/miann_ana/params/experiment_params_all.py
+python $SCRIPT all --config $BASE/miann_ana/params/experiment_params_SBF2.py
+
+# code for evaluation + comparison only:
+#python $SCRIPT evaluate --experiment-dir VAE_all
+#python $SCRIPT compare --experiment-dir VAE_all
+#python $SCRIPT evaluate --experiment-dir VAE_SBF2
+#python $SCRIPT compare --experiment-dir VAE_SBF2
+
