@@ -30,10 +30,10 @@ done
 # VAE_SBF2 experiment
 # create subsampled mpp_cluster data
 for exp in VAE CondVAE_siRNA-CC MPPleiden; do
-    python cluster.py VAE_SBF2/$exp create --subsample --frac 0.005 --save-dir aggregated/sub-0.005
+    python $SCRIPT VAE_SBF2/$exp create --subsample --frac 0.005 --save-dir aggregated/sub-0.005
 done
 
 # prepare full dataset for projecting clustering to
 for exp in VAE CondVAE_siRNA-CC MPPleiden; do
-    python cluster.py VAE_SBF2/$exp prepare-full --save-dir aggregated/full_data
+    python $SCRIPT VAE_SBF2/$exp prepare-full --save-dir aggregated/full_data
 done
