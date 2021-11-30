@@ -77,14 +77,14 @@ download_params = {
     # siRNA wells + controls for training on entire cells
     'SBF2': {
         'well_names': ['K18', 'L19', 'M18'],
-        'out_dir': '184A1_SBF2',
+        'out_dir': 'HeLa_SBF2',
         'object': 'Cells',
         'channels': download_channels['SBF2'],
         'size': 500000  # TODO check on pelkmanslab server what size was used
     },
     'scrambled': {
         'well_names': ['K19', 'L18', 'M19'],
-        'out_dir': '184A1_scrambled',
+        'out_dir': 'HeLa_scrambled',
         'object': 'Cells',
         'channels': download_channels['SBF2'],
         'size': 500000

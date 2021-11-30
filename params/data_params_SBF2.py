@@ -4,13 +4,13 @@ import os
 
 data_params = {
     # name of the resulting dataset that is defined by these params (relative to DATA_DIR/datasets)
-    'dataset_name': '184A1_SBF2_frac005_neigh3_cond_siRNA-CC',
+    'dataset_name': 'HeLa_SBF2_frac005_neigh3_cond_siRNA-CC',
     # name of data config (registered in config.ini)
     'data_config': "NascentRNA",
     # where to read data from (relative to DATA_DIR defined in data config)
     'data_dirs': 
-            [os.path.join('184A1_SBF2', well) for well in ['K18', 'L19', 'M18']] + \
-            [os.path.join('184A1_scrambled', well) for well in ['K19', 'L18', 'M19']],
+            [os.path.join('HeLa_SBF2', well) for well in ['K18', 'L19', 'M18']] + \
+            [os.path.join('HeLa_scrambled', well) for well in ['K19', 'L18', 'M19']],
     'channels': [ 
         "01_CDK9_pT186", "01_PABPC1", "02_CDK7", "02_RPS6_pS235_S236", "03_CDK9", "03_RPS6", "04_MAPK1_pT202_T204", 
         "05_GTF2B", "05_Sm", "06_CALR", "06_CTNNB1", "07_POLR2A", "07_SETD1A", "08_H3K4me3", "08_PXN", "09_CCNT1", 

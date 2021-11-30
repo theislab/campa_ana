@@ -9,7 +9,7 @@ base_config = {
     'data': {
         'load_dataset': True,
         'data_config': 'NascentRNA',
-        'dataset_name': '184A1_SBF2_frac005_neigh3_cond_siRNA-CC',
+        'dataset_name': 'HeLa_SBF2_frac005_neigh3_cond_siRNA-CC',
         'output_channels': None,
     },
     'model': {
