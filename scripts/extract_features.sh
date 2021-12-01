@@ -17,11 +17,12 @@ BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
 SCRIPT=$BASE/miann/cli/extract_features.py
 
 # VAE_all experiment
-#python $SCRIPT 
+#python $SCRIPT VAE_all/CondVAE_pert-CC "clustering_res0.5" --save-name features.h5ad intensity
+python $SCRIPT VAE_all/CondVAE_pert-CC "clustering_res0.5" --cluster-col annotation --save-name features_annotation.h5ad intensity
 
 # VAE_SBF2 experiment
 # extract intensity features for each clustering
 #python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC "clustering_res0.9_sub-0.33_seed1" --cluster-dir aggregated/sub-0.005_sub-0.33 --save-name features_seed1.h5ad --force intensity
 #python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC "clustering_res0.9_sub-0.33_seed1" --cluster-dir aggregated/sub-0.005_sub-0.33 --cluster-col annotation --save-name features_seed1_annotation.h5ad --force intensity
 #python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC "clustering_res0.9_sub-0.33_seed2" --cluster-dir aggregated/sub-0.005_sub-0.33 --save-name features_seed2.h5ad --force intensity
-python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC "clustering_res0.9_sub-0.33_seed3" --cluster-dir aggregated/sub-0.005_sub-0.33 --save-name features_seed3.h5ad --force intensity
+#python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC "clustering_res0.9_sub-0.33_seed3" --cluster-dir aggregated/sub-0.005_sub-0.33 --save-name features_seed3.h5ad --force intensity
