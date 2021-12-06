@@ -130,3 +130,6 @@ dmypy.json
 
 # custom
 *.out
+figures/fig1
+figures/fig1_suppl
+figures/fig3
