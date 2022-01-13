@@ -1,0 +1,32 @@
+---
+input:
+- help: Image that should be smoothed.
+  key: 19_TUBA1A
+  name: image
+  type: IntensityImage
+- help: 'Name of the filter kernel that should be applied to the image.
+
+    '
+  name: filter_name
+  type: Scalar
+  value: gaussian
+- help: 'Size (width and height) of the kernel. Provide a single positive and odd
+    integer value.
+
+    '
+  name: filter_size
+  type: Scalar
+  value: 3
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Smoothed image.
+  key: tub1a1.smoothed_image
+  name: smoothed_image
+  type: IntensityImage
+- help: ''
+  name: figure
+  type: Figure
+version: 0.1.0

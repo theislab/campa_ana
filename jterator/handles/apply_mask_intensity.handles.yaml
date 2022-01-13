@@ -1,0 +1,27 @@
+---
+input:
+- help: Image to be masked
+  key: se_crt.combined_image
+  name: image
+  type: IntensityImage
+- help: Mask to apply
+  key: outlines_low.inverted_image
+  name: mask
+  type: MaskImage
+- help: Value to place in image where mask is 0
+  name: value
+  type: Scalar
+  value: 0
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Masked image
+  key: se_crt_masked_with_outlines.masked_image
+  name: masked_image
+  type: IntensityImage
+- help: ''
+  name: figure
+  type: Figure
+version: 0.1.0

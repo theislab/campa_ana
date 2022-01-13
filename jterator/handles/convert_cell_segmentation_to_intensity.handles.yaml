@@ -1,0 +1,23 @@
+---
+input:
+- help: Image that should be converted.
+  key: cells.shrunk_image
+  name: image
+  type: Image
+- help: Bit-depth for output.
+  name: output_type
+  type: Scalar
+  value: 16-bit
+- help: Do you want to plot the result?
+  name: plot
+  type: Boolean
+  value: false
+output:
+- help: Intensity image.
+  key: cell_label_image.intensity_image
+  name: intensity_image
+  type: IntensityImage
+- help: Shows the intensity image.
+  name: figure
+  type: Figure
+version: 0.0.2
