@@ -26,7 +26,7 @@ python $SCRIPT all --config $BASE/miann_ana/params/experiment_params_SBF2.py
 
 # code for evaluation + comparison only:
 #python $SCRIPT evaluate --experiment-dir VAE_all
-#python $SCRIPT compare --experiment-dir VAE_all
+#python $SCRIPT compare --experiment-dir VAE_all --exp-name MPPleiden VAE CondVAE_pert-CC 
 #python $SCRIPT evaluate --experiment-dir VAE_SBF2
 #python $SCRIPT compare --experiment-dir VAE_SBF2
 

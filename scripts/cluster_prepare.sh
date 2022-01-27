@@ -19,7 +19,7 @@ SCRIPT=$BASE/miann/cli/cluster.py
 # VAE_all experiment
 # create subsampled mpp_cluster data
 for exp in VAE CondVAE_pert-CC MPPleiden; do
-    python $SCRIPT VAE_all/$exp create --subsample --frac 0.005 --save-dir aggregated/sub-0.005
+    python $SCRIPT VAE_all/$exp create --subsample --frac 0.001 --save-dir aggregated/sub-0.001
 done
 
 # prepare full dataset for projecting clustering to

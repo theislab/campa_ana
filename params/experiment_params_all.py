@@ -79,6 +79,21 @@ variable_config = [
             },
         },
     },
+    # conditional model without neighborhood information
+    {
+        'experiment': {'name': 'CondVAE_pert-CC_noneigh'},
+        'data': {
+            'dataset_name': '184A1_all_frac0005_neigh1_cond_pert-CC',
+        },
+        'model': {
+            'model_cls': ModelEnum.VAEModel,
+            'model_kwargs': {
+                'num_neighbors': 1,
+                'num_conditions': 14,
+                'encode_condition': [10,10],
+            },
+        },
+    },
     # MPPleiden model (non-trainable)
     {
         'experiment': {'name': 'MPPleiden'},
