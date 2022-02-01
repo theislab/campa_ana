@@ -14,7 +14,7 @@ source ~/.bashrc
 conda activate pelkmans-3.9
 
 BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
-SCRIPT=$BASE/miann/cli/cluster.py
+SCRIPT=$BASE/campa/cli/cluster.py
 
 # VAE_all experiment
 # project clustering

@@ -1,7 +1,7 @@
 # read constants defined in config.ini
 #from configparser import ConfigParser
 import os
-#from miann.constants import get_value
+#from campa.constants import get_value
 
 # read config file
 SOURCE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
