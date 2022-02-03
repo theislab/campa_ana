@@ -13,7 +13,7 @@ source ~/.bashrc
 conda activate pelkmans-3.9
 
 BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
-SCRIPT=$BASE/miann/cli/extract_features.py
+SCRIPT=$BASE/campa/cli/extract_features.py
 
 
 # -- VAE_all experiment --
