@@ -3,9 +3,9 @@ import os
 import argparse
 import mcu
 import mcu.mpp
-from miann_ana.tm_data import get_tm_client
-from miann.constants import get_data_config
-from miann.utils import load_config
+from campa_ana.tm_data import get_tm_client
+from campa.constants import get_data_config
+from campa.utils import load_config
 
 def download_mpp(args):
     params = load_config(args.params)

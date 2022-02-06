@@ -1,6 +1,6 @@
 # Constants for NascentRNA dataset
 import os
-from miann.constants import BASE_DATA_DIR
+from campa.constants import BASE_DATA_DIR
 
 # --- dataset specific constants ---
 DATA_DIR = os.path.join(BASE_DATA_DIR, "NascentRNA_new")

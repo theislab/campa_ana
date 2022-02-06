@@ -4,7 +4,8 @@
 #SBATCH -e start_notebook_%j.out
 #SBATCH -J jupyterlab
 #SBATCH -p cpu_p
-#SBATCH --mem=63G
+#SBATCH -c 1
+#SBATCH --mem=127G
 #SBATCH -t 10:00:00
 #SBATCH --nice=10000
 
