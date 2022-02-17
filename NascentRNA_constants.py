@@ -29,4 +29,3 @@ CONDITIONS = {
     # 2 siRNA perturbation
     'siRNA': ['scrambled', 'SBF2'],
 }
-
