@@ -33,4 +33,7 @@ SCRIPT=$BASE/campa/cli/extract_features.py
 #    "184A1_meayamycin/I12" "184A1_meayamycin/I20" 
 
 # object stats (for annotated data)
-python $SCRIPT VAE_all/CondVAE_pert-CC "clustering_res0.5" --cluster-col annotation --save-name features_annotation.h5ad object-stats --area-threshold 10
+python $SCRIPT VAE_all/CondVAE_pert-CC "clustering_res0.5" --cluster-col annotation --save-name features_annotation.h5ad object-stats \
+    --stats-features 'area' 'circularity' 'elongation' 'extent'
+
+    

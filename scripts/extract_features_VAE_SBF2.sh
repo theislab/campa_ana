@@ -25,7 +25,9 @@ SCRIPT=$BASE/campa/cli/extract_features.py
 #python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC "clustering_res0.9_sub-0.33_seed3" --cluster-dir aggregated/sub-0.005_sub-0.33 --cluster-col annotation --save-name features_seed3_annotation.h5ad --force intensity
 
 # object stats (for annotated seed3)
-python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC "clustering_res0.9_sub-0.33_seed3" --cluster-col annotation --save-name features_seed3_annotation.h5ad object-stats --area-threshold 10
+python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC "clustering_res0.9_sub-0.33_seed3" --cluster-col annotation --save-name features_seed3_annotation.h5ad object-stats \
+    --stats-features 'area' 'circularity' 'elongation' 'extent'\
+    --stats-channels '20_SP100' '11_PML'\
 
 # NOTE: co-occurrence calculation for this experiment takes about 40 hours per well
 # co-occurrence (for annotated seed3)
