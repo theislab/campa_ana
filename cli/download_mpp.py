@@ -39,8 +39,9 @@ def download_mpp(args):
                                   object_type=download_params['object'],
                                   experiment_name=experiment_name,
                                   channel_names=download_params['channels'],
-                                  mean_object_size=download_params['size'])
-        #mcu.mpp.main(mpp_args)
+                                  mean_object_size=download_params['size'],
+                                  correct=download_params.get('correct', True))
+        mcu.mpp.main(mpp_args)
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
