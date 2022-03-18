@@ -21,12 +21,12 @@ BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
 SCRIPT=$BASE/campa/cli/train.py
 
 # train, evaluate, and compare all experiments
-python $SCRIPT all --config $BASE/campa_ana/params/experiment_params_all.py
-python $SCRIPT all --config $BASE/campa_ana/params/experiment_params_SBF2.py
+campa train all --config $BASE/campa_ana/params/experiment_params_all.py
+campa train all --config $BASE/campa_ana/params/experiment_params_SBF2.py
 
 # code for evaluation + comparison only:
-#python $SCRIPT evaluate --experiment-dir VAE_all
-#python $SCRIPT compare --experiment-dir VAE_all --exp-name MPPleiden VAE CondVAE_pert-CC 
-#python $SCRIPT evaluate --experiment-dir VAE_SBF2
-#python $SCRIPT compare --experiment-dir VAE_SBF2
+#campa train evaluate --experiment-dir VAE_all
+#campa train compare --experiment-dir VAE_all --exp-name MPPleiden VAE CondVAE_pert-CC 
+#campa train evaluate --experiment-dir VAE_SBF2
+#campa train compare --experiment-dir VAE_SBF2
 

@@ -15,9 +15,8 @@ conda activate pelkmans-3.9
 
 # run script
 BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
-SCRIPT=$BASE/campa/cli/create_dataset.py
 
-python $SCRIPT $BASE/campa_ana/params/data_params_all.py
-python $SCRIPT $BASE/campa_ana/params/data_params_all_noneigh.py
-python $SCRIPT $BASE/campa_ana/params/data_params_SBF2.py
+campa create_dataset $BASE/campa_ana/params/data_params_all.py
+campa create_dataset $BASE/campa_ana/params/data_params_all_noneigh.py
+campa create_dataset $BASE/campa_ana/params/data_params_SBF2.py
 

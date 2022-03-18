@@ -13,27 +13,24 @@
 source ~/.bashrc
 conda activate pelkmans-3.9
 
-BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
-SCRIPT=$BASE/campa/cli/cluster.py
-
 # VAE_all experiment
 # create subsampled mpp_cluster data
 for exp in VAE CondVAE_pert-CC MPPleiden; do
-    python $SCRIPT VAE_all/$exp create --subsample --frac 0.001 --save-dir aggregated/sub-0.001
+    campa cluster VAE_all/$exp create --subsample --frac 0.001 --save-dir aggregated/sub-0.001
 done
 
 # prepare full dataset for projecting clustering to
 for exp in VAE CondVAE_pert-CC MPPleiden; do
-    python $SCRIPT VAE_all/$exp prepare-full --save-dir aggregated/full_data
+    campa cluster VAE_all/$exp prepare-full --save-dir aggregated/full_data
 done
 
 # VAE_SBF2 experiment
 # create subsampled mpp_cluster data
 for exp in VAE CondVAE_siRNA-CC MPPleiden; do
-    python $SCRIPT VAE_SBF2/$exp create --subsample --frac 0.005 --save-dir aggregated/sub-0.005
+    campa cluster VAE_SBF2/$exp create --subsample --frac 0.005 --save-dir aggregated/sub-0.005
 done
 
 # prepare full dataset for projecting clustering to
 for exp in VAE CondVAE_siRNA-CC MPPleiden; do
-    python $SCRIPT VAE_SBF2/$exp prepare-full --save-dir aggregated/full_data
+    campa cluster VAE_SBF2/$exp prepare-full --save-dir aggregated/full_data
 done
