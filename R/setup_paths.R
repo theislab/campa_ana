@@ -11,5 +11,13 @@ data_dirs <- list.dirs(DATA_DIR) %>%
   tibble(data_dir=.) %>%
   filter(grepl(cell_type,data_dir)) %>%
   mutate(well_name = basename(data_dir)) %>%
-  filter(grepl("^[A-Z]\\d{2}$",well_name)) 
+  filter(grepl("^[A-Z]\\d{2}$",well_name)) %>%
+  filter(!grepl("ilastik",data_dir))
+
+ilastik_data_dirs <- list.dirs(DATA_DIR) %>%
+  tibble(ilastik_data_dir=.) %>%
+  filter(grepl(cell_type,ilastik_data_dir)) %>%
+  mutate(well_name = basename(ilastik_data_dir)) %>%
+  filter(grepl("^[A-Z]\\d{2}$",well_name)) %>%
+  filter(grepl("ilastik",ilastik_data_dir))
 
