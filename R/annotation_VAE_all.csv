@@ -1,0 +1,11 @@
+cluster_id,cluster_annotation,color
+0,Nucleoplasm,#118ab2
+1,Nucleolus,#073b4c
+2,Nucleoplasm,#118ab2
+3,Nuclear speckles,#ffd166
+4,Extra-nuclear,#c6beaa
+5,Nucleoplasm,#118ab2
+6,Nuclear periphery,#06d6a0
+7,Nucleoplasm,#118ab2
+8,PML bodies,#ef476f
+9,Cajal bodies,#bca0d0

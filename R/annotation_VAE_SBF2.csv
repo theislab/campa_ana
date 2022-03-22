@@ -1,0 +1,22 @@
+﻿cluster,cluster_annotation,color,cluster_annotation_original
+0,Mitochondria/ER (perinuclear),#0DAB71,ER (perinuclear)
+1,Nucleoplasm,#118ab2,Nucleoplasm
+2,Cytoplasm,#f3e5c2,Cytoplasm
+3,Cytoplasm,#f3e5c2,Cytoplasm
+4,Cytoplasm,#f3e5c2,Cytoplasm
+5,Cytoplasm,#f3e5c2,Cytoplasm
+6,Cell-cell contacts,#F06543,Cell-cell contacts
+7,Nuclear periphery,#06d6a0,Nuclear periphery
+8,Nucleolus,#073b4c,Nucleolus
+9,Golgi apparatus,#F08080,Golgi apparatus
+10,Focal adhesions,#90D7FF,Focal adhesions
+11,Mitochondria (peripheral),#FF86C8,Mitochondria (peripheral)
+12,Cytoplasm,#f3e5c2,Cytoplasm
+13,P-bodies,#A62639,P-bodies
+14,ER (peripheral),#085E3F,ER (peripheral)
+15,HDAC3 foci,#440D0F,HDAC3 foci
+16,Nuclear speckles,#ffd166,Nuclear speckles
+17,Cajal bodies,#bca0d0,Cajal bodies
+18,PML bodies,#ef476f,PML bodies
+19,P-bodies,#9c2133,P-bodies
+20,Antibody aggregates,#EBD494,Antibody aggregates
