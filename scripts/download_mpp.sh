@@ -16,7 +16,7 @@ conda activate pelkmans-3.9
 # run script
 CUR_DIR=$(dirname $0)
 CUR_DIR=/data/homes/hannah/NascentRNA/software_new/campa_ana/scripts
-SCRIPT=$CUR_DIR/../cli/download_mpp.py
+SCRIPT=$CUR_DIR/download_mpp.py
 #PARAMS=$CUR_DIR/../params/download_params.py
 PARAMS=$CUR_DIR/../params/download_params_ilastik.py
 
