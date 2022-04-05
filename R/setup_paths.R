@@ -11,7 +11,6 @@ campa_res_dirs <- list.dirs(experiment_dir) %>%
   filter(n_files > 1) %>%
   select(-n_files)
 
-
 data_dirs <- list.dirs(DATA_DIR) %>%
   tibble(data_dir=.) %>%
   filter(grepl(cell_type,data_dir)) %>%

@@ -11,6 +11,11 @@ load_channels <- function(data_dir) {
   return(channels$channel_name)
 }
 
+load_obj_ids <- function(dirname) {
+  mapobject_ids <- np$load(file.path(dirname,"obj_ids.npy"))
+  return(tibble(mapobject_id=mapobject_ids))
+}
+
 load_input_data <- function(dirname,channels) {
   mapobject_ids <- np$load(file.path(dirname,"obj_ids.npy"))
   labels <- np$load(file.path(dirname,"labels.npy"))
@@ -51,5 +56,14 @@ load_pixel_clustering <- function(dirname,filename) {
                      x=x,
                      y=y,
                      cluster_id=cluster_ids) 
+  return(combined)
+}
+
+load_latent_space <- function(dirname) {
+  mapobject_ids <- np$load(file.path(dirname,"obj_ids.npy"))
+  latent_space <- np$load(file.path(dirname,"latent.npy"))
+  
+  combined <- tibble(mapobject_id=mapobject_ids,
+                     latent_space=latent_space) 
   return(combined)
 }
