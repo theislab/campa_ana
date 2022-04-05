@@ -52,3 +52,6 @@ TODO: add info on which notebooks output which panels
     - Figure 3 (perturbation dependent pixel clustering)
         - `fig1_umap_linear_classifier.ipynb`
         
+## Figure files
+- figures can be found [in this nextcloud folder](https://hmgubox2.helmholtz-muenchen.de/index.php/s/36PrZwt4cMniLfW)
+- sync figures: `rsync -rva hpc-submit01.scidom.de:/home/icb/hannah.spitzer/projects/pelkmans/software_new/campa_ana/figures/ ~/projects/pelkmans/software_new/campa_ana/figures --exclude=".*"`
