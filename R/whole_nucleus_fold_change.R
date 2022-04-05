@@ -21,6 +21,12 @@ source(file.path(campa_ana$constants$SOURCE_DIR,"R","mixed_models.R"))
 source(file.path(campa_ana$constants$SOURCE_DIR,"R","channels_rename_info.R"))
 source(file.path(campa_ana$constants$SOURCE_DIR,"R","io.R"))
 
+# create directory to hold plots
+plot_dir <- file.path(campa_ana$constants$SOURCE_DIR,"figures","dot_plots")
+if (!dir.exists(plot_dir)) {
+  dir.create(plot_dir)
+}
+
 # read metadata files
 channels_metadata <- read_csv(file.path(DATA_DIR,"channels_metadata.csv")) %>% 
   select(-1)
@@ -69,8 +75,7 @@ whole_nucleus_intensity_fold_changes <- map_dfr(
     transform = "log",
     random_effect = well_name,
     contrast_var = treatment,
-    contrast_var_reference = "Control",
-    unnormalised_only = T)
+    contrast_var_reference = "Control")
 )
 
 # adjust channel names for plotting
@@ -151,21 +156,21 @@ all_pert_bubble <- make_bubble_plot(whole_nucleus_intensity_fold_changes,
 
 # Save PDF and PNG output
 all_pert_bubble + theme(legend.position = "none")
-ggsave(filename = file.path("PLOTS/DOT_PLOTS/whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_vertical.pdf"),
+ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_vertical.pdf"),
        width=3.8,height=10,units="cm")
-ggsave_cairo(filename = file.path("PLOTS/DOT_PLOTS/whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot.png"),
+ggsave_cairo(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot.png"),
              width=3.8,height=10,units="cm",dpi=600)
 
 # Save legend separately
 ggpubr::as_ggplot(ggpubr::get_legend(all_pert_bubble, position = NULL))
-ggsave(filename = file.path("PLOTS/DOT_PLOTS/whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_vertical_legend.pdf"),
+ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_vertical_legend.pdf"),
        width=3.8,height=3,units="cm")
 
 # generate dendrogram as a separate plots
 tr <- ggtree(as.dendrogram(col_clustering),right=F,size=0.2)
-ggsave(filename = file.path("PLOTS/DOT_PLOTS/whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_tree_vertical_channels.pdf"),width=1,height=10,units="cm")
+ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_tree_vertical_channels.pdf"),width=1,height=10,units="cm")
 tr <- ggtree(as.dendrogram(row_clustering),right=F,size=0.2)
-ggsave(filename = file.path("PLOTS/DOT_PLOTS/whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_tree_vertical_treatments.pdf"),width=1,height=3,units="cm")
+ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_tree_vertical_treatments.pdf"),width=1,height=3,units="cm")
 
 # DMSO vs control -----
 
@@ -182,8 +187,7 @@ whole_nucleus_intensity_fold_changes_dmso_vs_control <- map_dfr(
     transform = "log",
     random_effect = well_name,
     contrast_var = treatment,
-    contrast_var_reference = "Untreated",
-    unnormalised_only = T)
+    contrast_var_reference = "Untreated")
 )
 
 # adjust channel names for plotting
@@ -198,14 +202,14 @@ dmso_bubble <- make_bubble_plot(whole_nucleus_intensity_fold_changes_dmso_vs_con
 
 # Save PDF and PNG output
 dmso_bubble + theme(legend.position = "none")
-ggsave(filename = file.path("PLOTS/DOT_PLOTS/whole_nucleus_DMSO_comp_untreated_all_cells_dot_plot.pdf"),
+ggsave(filename = file.path(plot_dir,"whole_nucleus_DMSO_comp_untreated_all_cells_dot_plot.pdf"),
        width=3.2,height=10,units="cm")
-ggsave_cairo(filename = file.path("PLOTS/DOT_PLOTS/whole_nucleus_DMSO_comp_untreated_all_cells_dot_plot.png"),
+ggsave_cairo(filename = file.path(plot_dir,"whole_nucleus_DMSO_comp_untreated_all_cells_dot_plot.png"),
              width=3.2,height=10,units="cm",dpi=600)
 
 # Save legend separately
 ggpubr::as_ggplot(ggpubr::get_legend(dmso_bubble, position = NULL))
-ggsave(filename = file.path("PLOTS/DOT_PLOTS/whole_nucleus_DMSO_comp_untreated_all_cells_dot_plot_vertical_legend.pdf"),
+ggsave(filename = file.path(plot_dir,"whole_nucleus_DMSO_comp_untreated_all_cells_dot_plot_vertical_legend.pdf"),
        width=3.8,height=3,units="cm")
 
 

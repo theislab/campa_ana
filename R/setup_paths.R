@@ -8,7 +8,9 @@ campa_res_dirs <- list.dirs(experiment_dir) %>%
   filter(grepl("^[A-Z]\\d{2}$",well_name)) %>%
   # check if campa_res_dir are empty
   mutate(n_files = map_int(campa_res_dir,~length(list.files(.)))) %>%
-  filter(n_files > 1)
+  filter(n_files > 1) %>%
+  select(-n_files)
+
 
 data_dirs <- list.dirs(DATA_DIR) %>%
   tibble(data_dir=.) %>%
@@ -18,7 +20,8 @@ data_dirs <- list.dirs(DATA_DIR) %>%
   filter(!grepl("ilastik",data_dir)) %>%
   # check if data_dir are empty
   mutate(n_files = map_int(data_dir,~length(list.files(.)))) %>%
-  filter(n_files > 1)
+  filter(n_files > 1) %>%
+  select(-n_files)
 
 ilastik_data_dirs <- list.dirs(DATA_DIR) %>%
   tibble(ilastik_data_dir=.) %>%
@@ -28,5 +31,7 @@ ilastik_data_dirs <- list.dirs(DATA_DIR) %>%
   filter(grepl("ilastik",ilastik_data_dir)) %>%
   # check if ilastik_data_dir are empty
   mutate(n_files = map_int(ilastik_data_dir,~length(list.files(.)))) %>%
-  filter(n_files > 1)
+  filter(n_files > 1) %>%
+  select(-n_files)
+
 
