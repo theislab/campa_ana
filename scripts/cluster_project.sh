@@ -18,11 +18,11 @@ SCRIPT=$BASE/campa/cli/cluster.py
 
 # VAE_all experiment
 # project clustering
-python $SCRIPT VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res0.5"
+campa cluster VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res0.5"
 
 
 # VAE_SBF2 experiment
 # project clustering
-#python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed1"
-#python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed2"
-#python $SCRIPT VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed3"
+#campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed1"
+#campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed2"
+#campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed3"

@@ -9,13 +9,16 @@
 #
 
 # set up
-#source ~/.bashrc
-#module load Anaconda3
+source ~/.bashrc
+module load Anaconda3
+conda activate pelkmans-3.9
 
 # run script
 CUR_DIR=$(dirname $0)
-SCRIPT=$CUR_DIR/../cli/download_mpp.py
-PARAMS=$CUR_DIR/../params/download_params.py
+CUR_DIR=/data/homes/hannah/NascentRNA/software_new/campa_ana/scripts
+SCRIPT=$CUR_DIR/download_mpp.py
+#PARAMS=$CUR_DIR/../params/download_params.py
+PARAMS=$CUR_DIR/../params/download_params_ilastik.py
 
 echo "running $SCRIPT from $CUR_DIR"
 python $SCRIPT --params $PARAMS --key unperturbed
@@ -26,5 +29,5 @@ python $SCRIPT --params $PARAMS --key TSA
 python $SCRIPT --params $PARAMS --key triptolide
 python $SCRIPT --params $PARAMS --key EU10
 python $SCRIPT --params $PARAMS --key meayamycin
-python $SCRIPT --params $PARAMS --key SBF2
-python $SCRIPT --params $PARAMS --key scrambled
+#python $SCRIPT --params $PARAMS --key SBF2
+#python $SCRIPT --params $PARAMS --key scrambled
