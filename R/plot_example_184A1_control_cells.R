@@ -122,6 +122,15 @@ selected_pixels <- pivot_longer(selected_pixels,cols = matches("\\d{2}_"),values
 #S = 231622,
 #G2 = 256562
 
+# calculate size
+selected_pixels_outlines %>% 
+  filter(mapobject_id==256562) %>%
+  ungroup() %>%
+  summarise(min_x = min(x), max_x = max(x),
+            min_y = min(y), max_y = max(y)) %>%
+  mutate(x_size = (max_x-min_x) *6.5/60,
+         y_size = (max_y-min_y) *6.5/60)
+
 selected_pixels_outlines <- selected_pixels %>%
   group_by(mapobject_id) %>%
   nest() %>%
@@ -148,8 +157,8 @@ segmentation_images <- selected_pixels_outlines %>%
       scale_x_continuous(expand = c(0,0)) +
       scale_y_continuous(expand = c(0,0)) +
       theme_void(base_size = 7) +
-      theme(aspect.ratio = 1,
-            legend.position = "none",
+      coord_fixed() + 
+      theme(legend.position = "none",
             panel.spacing = unit(0,"mm"),
             strip.text = element_blank()) +
       scale_fill_manual(values = annotation$color[match(levels(selected_pixels_outlines$cluster_annotation),annotation$cluster_annotation)])
@@ -158,6 +167,79 @@ segmentation_images
 ggsave(segmentation_images,file=file.path(plot_dir,"unperturbed_examples_full_segmentation.pdf"),width=10,height=3,units="cm")
 ggsave_cairo(segmentation_images,file=file.path(plot_dir,"unperturbed_examples_full_segmentation.png"),width=10,height=3,units="cm",dpi=600)
 
+individual_compartments <- c("Nucleoplasm","Cajal bodies","Nuclear speckles","PML bodies","Nucleolus","Nuclear periphery")
+segmentation_images <- map(
+  individual_compartments,
+  function(compartment) {
+    selected_pixels_outlines %>%
+      filter(mapobject_id==256562) %>%
+      mutate(x=x-min(x),y=y-min(y)) %>%
+      ungroup() %>% {
+        ggplot(data=.,aes(x=x,y=y,fill=cluster_annotation)) + 
+          geom_tile(data=filter(.,cluster_annotation==compartment)) + 
+          geom_tile(data=filter(.,outline==T),fill=grey(0.4)) +
+          scale_x_continuous(expand = c(0.05,0.05)) +
+          scale_y_continuous(expand = c(0.05,0.05)) +
+          theme_void(base_size = 7) +
+          coord_fixed() +
+          theme(legend.position = "none",
+                panel.spacing = unit(0,"mm"),
+                strip.text = element_blank()) +
+          scale_fill_manual(values = annotation$color[match(c(compartment),annotation$cluster_annotation)])
+      }
+  })
+segmentation_images
+map2(individual_compartments,segmentation_images,
+     ~ggsave(.y,file=file.path(plot_dir,paste0("unperturbed_examples_256562_",.x,"_segmentation.pdf")),width=1.65,height=1.65,units="cm"))
+map2(individual_compartments,segmentation_images,
+     ~ggsave_cairo(.y,file=file.path(plot_dir,paste0("unperturbed_examples_256562_",.x,"_segmentation.png")),width=1.65,height=1.65,units="cm",dpi=600))
+
+
+plot_single_channel <- function(dat,channel_name,percentile_rescaling=0.997) {
+  channel_name <- enquo(channel_name)
+  channel_image <- dat %>%
+    filter(mapobject_id==256562) %>%
+    select(mapobject_id,y,x,cell_cycle,outline,
+           !! channel_name) %>%
+    ungroup() %>%
+    mutate(x=x-min(x),y=y-min(y)) %>%
+    ungroup() %>%
+    pivot_longer(matches("\\d{2}_"),names_to="channel") %>%
+    left_join(rename_channels_for_plotting_dict,by=c("channel"="old")) %>%
+    group_by(channel) %>% 
+    mutate(value = value / quantile(value,percentile_rescaling)) %>% {
+      ggplot(data=.,aes(x=x,y=y,fill=value)) + 
+        geom_tile() +
+        geom_tile(data=filter(.,outline==T),fill=grey(0.4)) +
+        scale_x_continuous(expand = c(.05,.05)) +
+        scale_y_continuous(expand = c(.05,.05)) +
+        facet_grid(~new) + 
+        scale_fill_gradient(low = "white",high="black",limits=c(0,1.2),oob=scales::oob_squish) +
+        #scale_fill_viridis_c(option ="D",limits=c(0,1.2),oob=scales::oob_squish) +
+        theme_void(base_size = 7) +
+        coord_fixed() + 
+        theme(legend.position = "none")
+    }
+  ggsave(channel_image,file=file.path(plot_dir,paste0("unperturbed_examples_256562_",rlang::as_name(channel_name),".pdf")),width=1.8,height=1.8,units="cm")
+  ggsave_cairo(channel_image,file=file.path(plot_dir,paste0("unperturbed_examples_256562_",rlang::as_name(channel_name),".png")),width=1.8,height=1.8,units="cm",dpi=600)
+  
+  channel_image
+}
+
+plot_single_channel(selected_pixels_outlines,`13_POL2RA_pS5`)
+plot_single_channel(selected_pixels_outlines,`21_NCL`)
+plot_single_channel(selected_pixels_outlines,`18_NONO`)
+plot_single_channel(selected_pixels_outlines,`10_H3K27ac`,percentile_rescaling = 0.99)
+plot_single_channel(selected_pixels_outlines,`05_Sm`,percentile_rescaling = 0.99)
+plot_single_channel(selected_pixels_outlines,`21_COIL`,percentile_rescaling = 0.9995)
+plot_single_channel(selected_pixels_outlines,`11_PML`,percentile_rescaling = 0.999)
+plot_single_channel(selected_pixels_outlines,`09_SRRM2`,percentile_rescaling = 0.998)
+plot_single_channel(selected_pixels_outlines,`20_ALYREF`)
+plot_single_channel(selected_pixels_outlines,`19_KPNA1_MAX`,percentile_rescaling = 0.9995)
+plot_single_channel(selected_pixels_outlines,`16_H3`)
+plot_single_channel(selected_pixels_outlines,`08_H3K4me3`)
+
+# all cell-cycle phases
 individual_compartments <- c("Nucleoplasm","Cajal bodies","Nuclear speckles","PML bodies","Nucleolus")
 segmentation_images <- map(
   individual_compartments,
@@ -177,9 +259,8 @@ segmentation_images <- map(
           scale_y_continuous(expand = c(0,0)) +
           facet_wrap(~cell_cycle) + 
           theme_void(base_size = 7) +
-          
-          theme(aspect.ratio = 1,
-                legend.position = "none",
+          coord_fixed() + 
+          theme(legend.position = "none",
                 panel.spacing = unit(0,"mm"),
                 strip.text = element_blank()) +
           scale_fill_manual(values = annotation$color[match(c(compartment),annotation$cluster_annotation)])
@@ -214,8 +295,8 @@ channel_images <- selected_pixels_outlines %>%
       scale_fill_gradient(low = "white",high="black",limits=c(0,1.2),oob=scales::oob_squish) +
       #scale_fill_viridis_c(option ="D",limits=c(0,1.2),oob=scales::oob_squish) +
       theme_void(base_size = 7) +
-      theme(legend.position = "none",
-            aspect.ratio = 1)
+      coord_fixed() +
+      theme(legend.position = "none")
   }
 channel_images
 ggsave(channel_images,file=file.path(plot_dir,"unperturbed_examples_channel_images.pdf"),width=6,height=5,units="cm")
