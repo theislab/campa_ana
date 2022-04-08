@@ -6,7 +6,7 @@
 fit_mixed_model <- function(
   dat,
   var,
-  channel_name,
+  channel_name = NULL,
   transform = NULL,
   random_effect = well_name,
   contrast_var = treatment,
@@ -23,7 +23,12 @@ fit_mixed_model <- function(
   contrast_nm = as_label(contrast_var)
   
   # variable types and factor levels must be adjusted for the model
-  dat_local <- filter(dat,channel==channel_name) %>%
+  if (!is.null(channel_name)) {
+    dat_local <- filter(dat,channel==channel_name)
+  } else {
+    dat_local <- dat
+  }
+  dat_local <- dat_local %>%
     mutate(var = !!var,
            random_effect = !!random_effect,
            contrast_var = relevel(factor(!!contrast_var), contrast_var_reference)) 
@@ -47,7 +52,7 @@ fit_mixed_model <- function(
     as_tibble() %>%
     rename(contrast_var = contrast_var_trt.vs.ctrl1) %>%
     mutate(comparison = "unnormalised",
-           channel = channel_name) %>%
+           channel = if_else(is.null(channel_name),NA_character_,channel_name)) %>%
     separate(contrast_var,into=c("contrast_var","reference_level"),sep=" - ") %>%
     rename(!!contrast_nm := contrast_var)
            
@@ -74,21 +79,21 @@ fit_mixed_model <- function(
   return(results)
 }
 
-# function to extract compartment-specific fold changes and their corresponding
+# function to extract CSL-specific fold changes and their corresponding
 # p-values as well as the p-values after normalisation to the overall
 # fold-change using nlme::lme. Measurements made across multiple cells in 
 # different wells (nested design).
 fit_mixed_model_per_CSL <- function(
   dat,
   var,
-  channel_name,
+  channel_name = NULL,
   transform = NULL,
   object_id = mapobject_id,
   random_effect = well_name,
   contrast_var = treatment,
   contrast_var_reference = "Control",
   group_var = cluster_annotation,
-  group_var_reference = "All",
+  group_var_reference = "all",
   unnormalised_only = FALSE) {
   
   require(tidyverse)
@@ -105,13 +110,22 @@ fit_mixed_model_per_CSL <- function(
   group_nm = as_label(group_var)
   
   # variable types and factor levels must be adjusted for the model
-  dat_local <- filter(dat,channel==channel_name) %>%
+  if (!is.null(channel_name)) {
+    dat_local <- filter(dat,channel==channel_name)
+  } else {
+    dat_local <- dat
+  }
+  dat_local <- dat_local %>%
     mutate(var = !!var,
            object_id = factor(!!object_id),
            random_effect = !!random_effect,
+           # set contrast reference level
            contrast_var = relevel(factor(!!contrast_var), contrast_var_reference),
+           # set grouping variable reference level
            group_var = relevel(factor(!!group_var), group_var_reference),
-           group_var_id = as.integer(group_var))
+           # convert grouping variable to integer
+           group_var_id = as.integer(group_var)) %>%
+    select(object_id,random_effect,var,contrast_var,group_var,group_var_id)
   
   # transform input data
   if (is.null(transform)) {
@@ -125,11 +139,10 @@ fit_mixed_model_per_CSL <- function(
                    data = dat_local,
                    # Uncorrelated compartment-specific random intercepts per well
                    random = list(random_effect = nlme::pdDiag(~ 0 + group_var)),
-                   # Correlation between compartments within a cell
+                   # Correlation between CSLs (groups) within a cell (object_id)
                    correlation = nlme::corSymm(form = ~ group_var_id | random_effect / object_id),   
-                   # Different variances for each compartment
+                   # Different variances for each CSL (group)
                    weights = nlme::varIdent(form = ~ 1 | contrast_var * group_var),
-                   # TODO: check sing.tol with Mark, this was required to get convergence for PABPC1
                    control = list(maxIter = 1000, msMaxIter = 1000,
                                   msMaxEval = 1000, sing.tol=1e-20))
   
@@ -140,7 +153,7 @@ fit_mixed_model_per_CSL <- function(
     as_tibble() %>%
     rename(contrast_var = contrast_var_trt.vs.ctrl1) %>%
     mutate(comparison = "unnormalised",
-           channel = channel_name) %>%
+           channel = if_else(is.null(channel_name),NA_character_,channel_name)) %>%
     rename(!!group_nm := group_var,
            !!contrast_nm := contrast_var)
   
@@ -157,7 +170,7 @@ fit_mixed_model_per_CSL <- function(
       rename(contrast_var = contrast_var_trt.vs.ctrl1,
              group_var = group_var_trt.vs.ctrl1) %>%
       mutate(comparison = paste0("relative_to_",group_var_reference),
-             channel = channel_name) %>% 
+             channel = if_else(is.null(channel_name),NA_character_,channel_name)) %>%
       rename(!!group_nm := group_var,
              !!contrast_nm := contrast_var) 
     results <- bind_rows(comparison_raw,comparison_normalised)
