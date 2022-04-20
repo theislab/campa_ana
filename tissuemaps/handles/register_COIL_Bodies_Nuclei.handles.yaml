@@ -1,0 +1,21 @@
+---
+input:
+- help: 'Binary or labeled mask image containing the objects (connected pixel components)
+    that should be registered.
+
+    '
+  key: COIL_ILASTIK.masked_image
+  name: mask
+  type: MaskImage
+- help: 'Should objects be relabeled on registration.
+
+    '
+  name: relabel
+  type: Boolean
+  value: true
+output:
+- help: Name that should be given to the objects in "mask".
+  key: COIL_Bodies_Nuclei
+  name: objects
+  type: SegmentedObjects
+version: 0.2.0

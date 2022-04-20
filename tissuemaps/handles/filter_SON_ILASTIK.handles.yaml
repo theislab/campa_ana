@@ -1,0 +1,39 @@
+---
+input:
+- help: Image in which objects should be filtered.
+  key: SON_ILASTIK.mask
+  name: mask
+  type: MaskImage
+- help: 'Name of the feature based on which objects in "mask" should be filtered.
+
+    '
+  name: feature
+  type: Character
+  value: area
+- help: 'Minimal allowed feature value. Objects with values below this threshold will
+    be removed.
+
+    '
+  name: lower_threshold
+  type: Numeric
+  value: 4
+- help: 'Maximal allowed feature value. Objects with values above this threshold will
+    be removed.
+
+    '
+  name: upper_threshold
+  type: Numeric
+  value: null
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Filtered mask image.
+  key: SON_ILASTIK.filtered_mask
+  name: filtered_mask
+  type: MaskImage
+- help: Comparison of "mask" and "filtered_mask".
+  name: figure
+  type: Figure
+version: 0.2.0

@@ -1,0 +1,19 @@
+---
+input:
+- help: Image that should be inverted.
+  key: NCL_SON_SRRM2.combined_mask
+  name: image
+  type: Image
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Inverted image.
+  key: NCL_SON_SRRM2.inverted_image
+  name: inverted_image
+  type: Image
+- help: Comparison of "image" and "inverted_image"
+  name: figure
+  type: Figure
+version: 0.0.1

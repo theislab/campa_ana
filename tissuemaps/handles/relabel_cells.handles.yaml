@@ -1,0 +1,19 @@
+---
+input:
+- help: Label image that should be relabeled.
+  key: cells.secondary_label_image
+  name: label_image
+  type: LabelImage
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Relabeled image.
+  key: cells.relabeled_image
+  name: relabeled_image
+  type: LabelImage
+- help: ''
+  name: figure
+  type: Figure
+version: 0.0.1

@@ -1,0 +1,79 @@
+---
+input:
+- help: 'Labeled image with registered objects for which texture features should be
+    extracted.
+
+    '
+  key: Cells
+  name: extract_objects
+  type: SegmentedObjects
+- help: 'Labeled image with registered objects to which texture features should be
+    assigned. "extract_objects" and "assign_objects" must either have a one-to-one
+    or a many-to-one relationship and "extract_objects" must be fully contained by
+    "assign_objects".
+
+    '
+  key: Cells
+  name: assign_objects
+  type: SegmentedObjects
+- help: 'Greyscale image from which texture features should be extracted, i.e. whose
+    pixel values should be used for the measurement.
+
+    '
+  key: 11_KPNA2_MAX
+  name: intensity_image
+  type: IntensityImage
+- help: 'Do feature values need to be aggregated? Values must be scalars, so in case
+    "extract_objects" and "assign_objects" have a many-to-one relationship aggregation
+    must be performed.
+
+    '
+  name: aggregate
+  type: Boolean
+  value: false
+- help: List of frequencies for Gabor filters
+  name: frequencies
+  type: Set
+  value:
+  - 2
+  - 10
+- help: Should Threshold Adjacency Statistics be extracted?
+  name: measure_TAS
+  type: Boolean
+  value: false
+- help: Should Local Binary Patterns be extracted?
+  name: measure_LBP
+  type: Boolean
+  value: false
+- help: List of radii for Local Binary Patterns
+  name: radii
+  type: Set
+  value:
+  - 1
+  - 10
+  - 5
+- help: Should Haralick features be extracted?
+  name: measure_haralick
+  type: Boolean
+  value: true
+- help: List of scales for the Haralick features
+  name: scales
+  type: Set
+  value:
+  - 2
+  - 10
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- channel_ref: intensity_image
+  help: Extracted texture features.
+  name: measurements
+  objects: assign_objects
+  objects_ref: extract_objects
+  type: Measurement
+- help: ''
+  name: figure
+  type: Figure
+version: 0.3.1

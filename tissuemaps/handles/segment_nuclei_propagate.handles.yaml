@@ -1,0 +1,63 @@
+---
+input:
+- help: 'Labeled image encoding primary objects that should be used as seeds for the
+    detection of secondary objects.
+
+    '
+  key: nuclei_seeds.expanded_image
+  name: primary_label_image
+  type: LabelImage
+- help: 'Grayscale image that should be used to find the outlines of secondary objects.
+
+    '
+  key: dapi.smoothed_image
+  name: intensity_image
+  type: IntensityImage
+- help: 'Maximum value of background.
+
+    '
+  name: threshold
+  type: Numeric
+  value: 117
+- help: 'Segmentation method.
+
+    '
+  name: method
+  type: Scalar
+  value: propagation
+- help: 'Used only for ''propagation'' method. Larger values cause the distance between
+    objects to be more important than the intensity image in determining cut lines.
+    Smaller values cause the intensity image to be more important than the distance
+    between objects.
+
+    '
+  name: regularization_factor
+  type: Numeric
+  value: 0.001
+- help: 'Used only for ''distance_n'', ''distance_b'' methods. The number of pixels
+    by which the primary objects will be expanded.
+
+    '
+  name: distance_to_dilate
+  type: Numeric
+  value: 3
+- help: Should holes in the secondary objects be filled?
+  name: fill_holes
+  type: Boolean
+  value: true
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Labeled image encoding secondary objects.
+  key: nuclei.secondary_label_image
+  name: secondary_label_image
+  type: LabelImage
+- help: 'Comparison of "primary_label_image" and "secondary_label_image". Also shows
+    outlines of objects in "secondary_label_image" on "intensity_image".
+
+    '
+  name: figure
+  type: Figure
+version: 0.0.1

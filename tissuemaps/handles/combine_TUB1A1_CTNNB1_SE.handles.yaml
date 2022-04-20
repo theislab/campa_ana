@@ -1,0 +1,31 @@
+---
+input:
+- help: First grayscale image.
+  key: tub1a1_ctnnb1.combined_image
+  name: image_1
+  type: IntensityImage
+- help: Second grayscale image.
+  key: se_crt.combined_image
+  name: image_2
+  type: IntensityImage
+- help: Weight for first image.
+  name: weight_1
+  type: Numeric
+  value: 0.25
+- help: Weight for second image.
+  name: weight_2
+  type: Numeric
+  value: 0.75
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Combined grayscale image.
+  key: tub1a1_ctnnb1_crt_se.combined_image
+  name: combined_image
+  type: IntensityImage
+- help: Comparison of "image_1", "image_2" and "combined_image".
+  name: figure
+  type: Figure
+version: 0.0.3
