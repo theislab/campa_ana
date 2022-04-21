@@ -24,7 +24,7 @@ source(file.path(campa_ana$constants$SOURCE_DIR,"R","io.R"))
 source(file.path(campa_ana$constants$SOURCE_DIR,"R","morphology.R"))
 
 # create directory to hold plots
-plot_dir <- file.path(campa_ana$constants$SOURCE_DIR,"figures","example_control_cells")
+plot_dir <- file.path(campa_ana$constants$SOURCE_DIR,"figures","example_cells")
 if (!dir.exists(plot_dir)) {
   dir.create(plot_dir)
 }

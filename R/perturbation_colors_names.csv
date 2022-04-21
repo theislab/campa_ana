@@ -1,0 +1,8 @@
+treatment,treatment_name,color
+AZD4573-30,AZD4573 (1h), #377eb8
+AZD4573-120,AZD4573 (2.5h), #984ea3
+CX5461-120,CX5461 (2.5h), #ff7f00
+Meayamycin-720,Meayamycin (12.5h), #4daf4a
+TSA-30,TSA (1h), #f781bf
+Triptolide-120,Triptolide (2.5h), #a65628
+control,Unperturbed, #999999
