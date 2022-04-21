@@ -1,10 +1,37 @@
+# clear the workspace
+rm(list=ls())
 
-intensity_fold_changes %>%
-  filter(treatment=="Meayamycin (12.5h) - Control") %>%
-  filter(comparison=="relative_to_all") %>%
-  make_bubble_plot(plot_var = log2_fold_change,
-                   row_var = channel,
-                   col_var = cluster)
+# load required packages
+library(tidyverse)
+
+# setup script-specific parameters
+cell_type <- "184A1"
+experiment_name <- "VAE_all/CondVAE_pert-CC"
+
+# setup python environment and experiment-specific parameters
+library(reticulate)
+reticulate::use_condaenv("pelkmans-3.9")
+campa <- import("campa")
+campa_ana <- import("campa_ana")
+np <- import("numpy") 
+
+# load required R functions from the campa_ana package
+source(file.path(campa_ana$constants$SOURCE_DIR,"R","setup_paths.R"))
+source(file.path(campa_ana$constants$SOURCE_DIR,"R","io.R"))
+source(file.path(campa_ana$constants$SOURCE_DIR,"R","mixed_models.R"))
+
+# directory to hold results of mixed models
+model_dir <- file.path(campa_ana$constants$SOURCE_DIR,"mixed_model_results")
+
+# create directory to hold plots
+plot_dir <- file.path(campa_ana$constants$SOURCE_DIR,"figures","dot_plots")
+if (!dir.exists(plot_dir)) {
+  dir.create(plot_dir)
+}
+
+# read fold changes calculated previously
+intensity_fold_changes <- read_csv(file = file.path(model_dir,"184A1_intensity_fold_changes.csv"))
+size_fold_changes <- read_csv(file = file.path(model_dir,"184A1_size_fold_changes.csv"))
 
 # make bubble plot
 make_bubble_plot <- function(fold_changes,
@@ -65,3 +92,14 @@ make_bubble_plot <- function(fold_changes,
   bubble_plot
 }
 
+intensity_fold_changes %>%
+  #filter(cluster=="Nuclear speckles") %>%
+  filter(treatment=="Meayamycin (12.5h) - Control") %>%
+  filter(comparison=="unnormalised") %>%
+  mutate(
+    p.value.adj.BY = p.adjust(p.value, "BY")) %>% 
+  #filter(channel=="01_PABPC1") %>%
+  #filter(cluster=="Nuclear speckles - all")
+  make_bubble_plot(plot_var = log2_fold_change,
+                   row_var = channel,
+                   col_var = cluster)
