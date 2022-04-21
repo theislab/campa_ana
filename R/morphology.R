@@ -31,6 +31,17 @@ find_small_regions_pixset <- function(d,area=1) {
   return(small_regions)
 }
 
+pad_matrix_zero <- function(m,extra) {
+  # add new rows
+  new_rows <- matrix(0, ncol=ncol(m), nrow=extra)
+  m <- rbind(new_rows, m, new_rows)
+  # add new columns
+  new_cols <- matrix(0, ncol=extra, nrow=nrow(m))
+  m <- cbind(new_cols, m, new_cols)
+  return(m)
+}
+
+
 # convert ebimage (matrix) to dataframe using triplet notation of sparse matrix as intermediate
 ebimage_to_data_frame <- function(im,labelled=F) {
   triplet <- as(as.matrix(im),"dgTMatrix")
@@ -61,18 +72,29 @@ erode_sparse <- function(d,width) {
 # erode a binary image (provided as a sparse matrix)
 dilate_sparse <- function(d,width) {
   if (width!=0) {
-    return(
+    # pad matrix before dilation to ensure edges are correct after dilation
+    d_pad <- pad_matrix_zero(as.matrix(d),width)
+    # dilate
+    d_pad_dilated_sparse <- as(
       as.matrix(
         EBImage::dilate(
-          as.matrix(d),
+          d_pad,
           kern = EBImage::makeBrush(width,shape="disc")
         )
+      ),"dgTMatrix")
+    # adjust coordinates to remove effects of padding
+    return(
+      as.matrix(
+        Matrix::sparseMatrix(i = d_pad_dilated_sparse@i - width,j = d_pad_dilated_sparse@j - width,index1=FALSE,
+                             dims=c(max(d_pad_dilated_sparse@i)+1,
+                                    max(d_pad_dilated_sparse@j)+1))
       )
     )
   } else {
     return(as.matrix(d))
   }
 }
+
 
 erode_clusters <- function(d,aggregate_by,width=3,remove_small=F) {
   aggregate_by <- enquo(aggregate_by)
