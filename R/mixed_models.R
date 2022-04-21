@@ -10,7 +10,8 @@ fit_mixed_model <- function(
   transform = NULL,
   random_effect = well_name,
   contrast_var = treatment,
-  contrast_var_reference = "Control") {
+  contrast_var_reference = "Control",
+  normalisation = "unnormalised") {
   
   require(tidyverse)
   require(nlme)
@@ -51,7 +52,7 @@ fit_mixed_model <- function(
     summary() %>% 
     as_tibble() %>%
     rename(contrast_var = contrast_var_trt.vs.ctrl1) %>%
-    mutate(comparison = "unnormalised",
+    mutate(comparison = normalisation,
            channel = if_else(is.null(channel_name),NA_character_,channel_name)) %>%
     separate(contrast_var,into=c("contrast_var","reference_level"),sep=" - ") %>%
     rename(!!contrast_nm := contrast_var)
@@ -127,6 +128,15 @@ fit_mixed_model_per_CSL <- function(
            group_var_id = as.integer(group_var)) %>%
     select(object_id,random_effect,var,contrast_var,group_var,group_var_id)
   
+  # check that only two treatments are being compared
+  if (length(levels(dat_local$contrast_var)) != 2) {
+    stop(paste0(
+    "Intended use of fit_mixed_model_per_CSL is to perform pairwise comparisons of contrast_var.
+    contrast_var has ",length(levels(dat_local$contrast_var))," levels."))
+  }
+  
+  contrast_var_condition <- setdiff(levels(dat_local$contrast_var),contrast_var_reference)[1]
+    
   # transform input data
   if (is.null(transform)) {
   } else if (transform == "log") {
@@ -138,7 +148,7 @@ fit_mixed_model_per_CSL <- function(
   mod <- nlme::lme(var ~ contrast_var * group_var, 
                    data = dat_local,
                    # Uncorrelated compartment-specific random intercepts per well
-                   random = list(random_effect = nlme::pdDiag(~ 0 + group_var)),
+                   random = list(random_effect = nlme::pdSymm(~ 0 + group_var)),
                    # Correlation between CSLs (groups) within a cell (object_id)
                    correlation = nlme::corSymm(form = ~ group_var_id | random_effect / object_id),   
                    # Different variances for each CSL (group)
@@ -159,18 +169,20 @@ fit_mixed_model_per_CSL <- function(
   
   if (!unnormalised_only) {
     # Provide the option to exclude this step
-    
+
     # Use emmeans to look at the interaction terms
     # Note that we have difficulties estimating the degrees of freedom using 
-    # "satterthwaite" method so have set this manually as df = 5
-    comparison_normalised <- contrast(emmeans(mod, ~ contrast_var * group_var, df = 5),
+    # "satterthwaite" method so have set this manually as using the containment method
+    degrees_of_freedom <- summary(mod)$tTable[paste0("contrast_var",contrast_var_condition), "DF"]
+    comparison_normalised <- contrast(emmeans(mod, ~ contrast_var * group_var, df = degrees_of_freedom),
                                       interaction = "trt.vs.ctrl1") %>%
       summary() %>% 
       as_tibble() %>%
       rename(contrast_var = contrast_var_trt.vs.ctrl1,
              group_var = group_var_trt.vs.ctrl1) %>%
       mutate(comparison = paste0("relative_to_",group_var_reference),
-             channel = if_else(is.null(channel_name),NA_character_,channel_name)) %>%
+             channel = if_else(is.null(channel_name),NA_character_,channel_name),
+             degrees_of_freedom = degrees_of_freedom) %>%
       rename(!!group_nm := group_var,
              !!contrast_nm := contrast_var) 
     results <- bind_rows(comparison_raw,comparison_normalised)

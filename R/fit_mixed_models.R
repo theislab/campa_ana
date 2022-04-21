@@ -11,7 +11,7 @@ library(parallel)
 library(foreach)
 
 # set n_cores_override = NULL to use maximum number of cores
-n_cores_override <- 8
+n_cores_override <- 12
 
 # setup script-specific parameters
 cell_type <- "184A1"
@@ -117,9 +117,9 @@ doParallel::registerDoParallel(cl)
 # convert to long format and remove non-positive
 campa_res_long_intensities <- campa_res_exclude_missing %>%
   pivot_longer(matches("^\\d{2}_"),names_to="channel",values_to="intensity") %>%
-  filter(intensity > 0 )
+  filter(intensity > 0 ) 
 
-all_treatments <- setdiff(unique(campa_res_long_intensities$treatment),"Control")[1]
+all_treatments <- setdiff(unique(campa_res_long_intensities$treatment),"Control")
 all_channels <- unique(campa_res_long_intensities$channel)
 
 system.time(
