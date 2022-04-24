@@ -48,7 +48,8 @@ fit_mixed_model <- function(
   
   # Use emmeans to look at the overall changes
   results <- contrast(emmeans(mod, ~ contrast_var),
-                      interaction = "trt.vs.ctrl1") %>%
+                      interaction = "trt.vs.ctrl1",
+                      mode = "appx-satterthwaite") %>%
     summary() %>% 
     as_tibble() %>%
     rename(contrast_var = contrast_var_trt.vs.ctrl1) %>%
@@ -145,16 +146,41 @@ fit_mixed_model_per_CSL <- function(
     stop(paste0("unknown value ", transform," for transform parameter"))
   }
   
-  mod <- nlme::lme(var ~ contrast_var * group_var, 
-                   data = dat_local,
-                   # Uncorrelated compartment-specific random intercepts per well
-                   random = list(random_effect = nlme::pdSymm(~ 0 + group_var)),
-                   # Correlation between CSLs (groups) within a cell (object_id)
-                   correlation = nlme::corSymm(form = ~ group_var_id | random_effect / object_id),   
-                   # Different variances for each CSL (group)
-                   weights = nlme::varIdent(form = ~ 1 | contrast_var * group_var),
-                   control = list(maxIter = 1000, msMaxIter = 1000,
-                                  msMaxEval = 1000, sing.tol=1e-20))
+  # fit this inside a function to allow error catching with repeats
+  do_fit <- function() {
+    model_fit <- nlme::lme(var ~ contrast_var * group_var, 
+                           data = dat_local,
+                           # Uncorrelated compartment-specific random intercepts per well
+                           random = list(random_effect = nlme::pdSymm(~ 0 + group_var)),
+                           # Correlation between CSLs (groups) within a cell (object_id)
+                           correlation = nlme::corSymm(form = ~ group_var_id | random_effect / object_id),   
+                           # Different variances for each CSL (group)
+                           weights = nlme::varIdent(form = ~ 1 | contrast_var * group_var),
+                           control = list(maxIter = 1000, msMaxIter = 1000,
+                                          msMaxEval = 1000, sing.tol=1e-20))
+    return(model_fit)
+  }
+  
+  # Try to fit the model 3 times
+  mod <- NULL
+  attempt <- 1
+  while( is.null(mod) && attempt <= 3 ) {
+    attempt <- attempt + 1
+    try(
+      mod <- do_fit()
+    )
+  } 
+  
+  # if model cannot be fit with 3 retries, skip and return a tibble of NAs
+  if (is.null(mod)) {
+    return(tibble(!!group_nm := levels(dat_local$group_var)[2],
+                  !!contrast_nm := levels(dat_local$contrast_var)[2],
+                  df = NA,
+                  p.value = NA,
+                  comparison = "unnormalised",
+                  channel = if_else(is.null(channel_name),NA_character_,channel_name),
+                  fold_change = NA))
+  }
   
   # Use emmeans to look at the overall (unnormalised) terms
   comparison_raw <- contrast(emmeans(mod, ~ contrast_var | group_var),
@@ -173,8 +199,8 @@ fit_mixed_model_per_CSL <- function(
     # Use emmeans to look at the interaction terms
     # Note that we have difficulties estimating the degrees of freedom using 
     # "satterthwaite" method so have set this manually as using the containment method
-    degrees_of_freedom <- summary(mod)$tTable[paste0("contrast_var",contrast_var_condition), "DF"]
-    comparison_normalised <- contrast(emmeans(mod, ~ contrast_var * group_var, df = degrees_of_freedom),
+    containment_df <- summary(mod)$tTable[paste0("contrast_var",contrast_var_condition), "DF"]
+    comparison_normalised <- contrast(emmeans(mod, ~ contrast_var * group_var, df = containment_df),
                                       interaction = "trt.vs.ctrl1") %>%
       summary() %>% 
       as_tibble() %>%
@@ -182,7 +208,7 @@ fit_mixed_model_per_CSL <- function(
              group_var = group_var_trt.vs.ctrl1) %>%
       mutate(comparison = paste0("relative_to_",group_var_reference),
              channel = if_else(is.null(channel_name),NA_character_,channel_name),
-             degrees_of_freedom = degrees_of_freedom) %>%
+             containment_df = containment_df) %>%
       rename(!!group_nm := group_var,
              !!contrast_nm := contrast_var) 
     results <- bind_rows(comparison_raw,comparison_normalised)
