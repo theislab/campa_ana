@@ -123,9 +123,9 @@ campa_res_long_intensities <- campa_res_exclude_missing %>%
   filter(intensity > 0 ) %>%
   inner_join(subset_objects)
 
-all_treatments <- setdiff(unique(campa_res_long_intensities$treatment),"Unperturbed")[2]
+all_treatments <- setdiff(unique(campa_res_long_intensities$treatment),"Unperturbed")
 all_channels <- unique(campa_res_long_intensities$channel)
-all_clusters <- setdiff(unique(campa_res_long_intensities$cluster),c("all","Extra-nuclear"))[2]
+all_clusters <- setdiff(unique(campa_res_long_intensities$cluster),c("all","Extra-nuclear"))
 
 # # example
 # fit_mixed_model_per_CSL(
@@ -186,29 +186,24 @@ campa_res_sizes <- campa_res_exclude_missing %>%
 system.time(
   for (current_treatment in all_treatments) {
     
-    # parallelise across channels
-    size_fold_changes_list <- foreach (i=1:length(all_treatments)) %dopar% {
-      
-      # use purrr to map across clusters (individually compared to "all")
-      res <- purrr::map_dfr(
-        all_clusters,
-        ~fit_mixed_model_per_CSL(
-          dat = filter(campa_res_sizes,treatment %in% c("Unperturbed",current_treatment) & cluster %in% c(.,"all")),
-          var = size,
-          transform = "log",
-          object_id = mapobject_id,
-          random_effect = well_name,
-          contrast_var = treatment,
-          contrast_var_reference = "Unperturbed",
-          group_var = cluster,
-          group_var_reference = "all",
-          unnormalised_only = F)
-      )
-    }
+    # use purrr to map across clusters (individually compared to "all")
+    size_fold_changes <- purrr::map_dfr(
+      all_clusters,
+      ~fit_mixed_model_per_CSL(
+        dat = filter(campa_res_sizes,treatment %in% c("Unperturbed",current_treatment) & cluster %in% c(.,"all")),
+        var = size,
+        transform = "log",
+        object_id = mapobject_id,
+        random_effect = well_name,
+        contrast_var = treatment,
+        contrast_var_reference = "Unperturbed",
+        group_var = cluster,
+        group_var_reference = "all",
+        unnormalised_only = F)
+    )
     
-    # save intensity fold-changes
-    size_fold_changes <- bind_rows(size_fold_changes_list)
-    write_csv(x = intensity_fold_changes,
+    # save size fold-changes
+    write_csv(x = size_fold_changes,
               file = file.path(model_dir,paste0("184A1_size_fold_changes_",current_treatment,".csv")))
     
   }

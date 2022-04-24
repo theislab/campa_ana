@@ -10,7 +10,7 @@ fit_mixed_model <- function(
   transform = NULL,
   random_effect = well_name,
   contrast_var = treatment,
-  contrast_var_reference = "Control",
+  contrast_var_reference = "Unperturbed",
   normalisation = "unnormalised") {
   
   require(tidyverse)
