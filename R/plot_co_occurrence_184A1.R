@@ -141,9 +141,11 @@ co_occurrences_mean_by_well %>%
   theme_bw(base_size = 7) +
   theme(legend.title = element_blank(),
         legend.key.size = unit(3,"mm"),
+        legend.position = "bottom",
+        legend.box.spacing = unit(0,"mm"),
         panel.grid = element_blank(),
         panel.spacing = unit(1,"mm"))
-ggsave(file.path(plot_dir,"184A1_co_occurrence_Controls_all.pdf"),width=15,height=12.5,units="cm")
+ggsave(file.path(plot_dir,"184A1_co_occurrence_Controls_all.pdf"),width=12,height=12.5,units="cm")
 
 # summarise all co-occurrences (averaged by treatment not well)
 
@@ -191,9 +193,11 @@ to_plot %>%
   theme_bw(base_size = 7) +
   theme(legend.title = element_blank(),
         legend.key.size = unit(3,"mm"),
+        legend.position = "bottom",
+        legend.box.spacing = unit(0,"mm"),
         panel.grid = element_blank(),
         panel.spacing = unit(1,"mm"))
-ggsave(file.path(plot_dir,"184A1_co_occurrence_Meayamycin_all.pdf"),width=15,height=12.5,units="cm")
+ggsave(file.path(plot_dir,"184A1_co_occurrence_Meayamycin_all.pdf"),width=12,height=12.5,units="cm")
 
 # plot selected for main figure
 to_plot <- co_occurrences_mean %>%
@@ -242,7 +246,11 @@ ggsave_cairo(file.path(plot_dir,"184A1_co_occurrence_Meayamycin_from_speckles_se
 # Object statistics
 
 boxplot_theme <- theme_bw(base_size = 7) +
-  theme(legend.position = "none",
+  theme(legend.title = element_blank(),
+        legend.position = "bottom",
+        legend.direction = "vertical",
+        legend.key.size = unit(2,"mm"),
+        legend.box.spacing = unit(0,"mm"),
         panel.grid=element_blank(),
         axis.ticks.x=element_blank(),
         axis.text.x=element_blank(),
@@ -274,10 +282,14 @@ p_speckles_count <- speckles_count %>%
   geom_boxplot(outlier.shape = NA,size=0.25) +
   scale_y_continuous(name="Median Nuclear\nspeckle count",limits = c(0,25),breaks=scales::pretty_breaks(n=3)) +
   scale_fill_manual(values = getcolor_perturbation[levels(speckles_size$treatment)]) +
+  boxplot_theme 
+
+(p_speckles_size / p_speckles_count) +
+  plot_layout(guides = "collect") &
   boxplot_theme
-p_speckles_size / p_speckles_count
+
 ggsave(file.path(plot_dir,"Meayamycin_speckles_stats.pdf"),
-       width=2.5,height=3.8,units="cm")
+       width=3.1,height=4.4,units="cm")
 
 # CX5461 ----
 
@@ -307,9 +319,11 @@ to_plot %>%
   theme_bw(base_size = 7) +
   theme(legend.title = element_blank(),
         legend.key.size = unit(3,"mm"),
+        legend.position = "bottom",
+        legend.box.spacing = unit(0,"mm"),
         panel.grid = element_blank(),
         panel.spacing = unit(1,"mm"))
-ggsave(file.path(plot_dir,"184A1_co_occurrence_CX5461_all.pdf"),width=15,height=12.5,units="cm")
+ggsave(file.path(plot_dir,"184A1_co_occurrence_CX5461_all.pdf"),width=12,height=12.5,units="cm")
 
 
 # plot selected for main figure

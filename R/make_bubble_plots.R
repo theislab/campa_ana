@@ -42,7 +42,7 @@ intensity_fold_changes_direct_norm <- map_dfr(
 
 intensity_fold_changes_full <- map_dfr(
   list.files(model_dir) %>% 
-    grepl(pattern = "intensity_fold_changes_(?!direct_norm)",x = .,perl=T) %>%
+    grepl(pattern = "intensity_fold_changes_(?!(direct_norm|DMSO))",x = .,perl=T) %>%
     list.files(model_dir)[.],
   ~read_csv(file = file.path(model_dir,.))
 )
@@ -56,7 +56,7 @@ size_fold_changes_direct_norm <- map_dfr(
 
 size_fold_changes_full <- map_dfr(
   list.files(model_dir) %>% 
-    grepl(pattern = "size_fold_changes_(?!direct_norm)",x = .,perl=T) %>%
+    grepl(pattern = "size_fold_changes_(?!(direct_norm|DMSO))",x = .,perl=T) %>%
     list.files(model_dir)[.],
   ~read_csv(file = file.path(model_dir,.))
 )
@@ -284,84 +284,87 @@ size_fold_changes_to_plot %>%
   filter(comparison=="relative_to_all") %>%
   nrow()
 
-# Plot unnormalised
-
-current_treatment <- "Meayamycin (12.5h)"
-
-to_plot <- fold_changes_to_plot %>%
-  filter(treatment==current_treatment) %>%
-  filter(comparison=="unnormalised")
-cols <- hclust_cols(to_plot)
-rows <- hclust_rows(to_plot)
-sizes_to_plot <- size_fold_changes_to_plot %>%
-  filter(treatment==current_treatment) %>%
-  filter(comparison=="unnormalised") %>%
-  mutate(axis_label="Number of\npixels")
-
-bubble_plot <- make_bubble_plot(fold_changes = to_plot,
-                 plot_var = log2_fold_change,
-                 col_var = channel_name,
-                 row_var = cluster,
-                 col_order=cols,
-                 row_order=rows,
-                 color_limits=c(-2,2))
-
-size_bubble_plot <- make_bubble_plot(fold_changes = sizes_to_plot,
-                 plot_var = log2_fold_change,
-                 col_var = axis_label,
-                 row_var = cluster,
-                 row_order=rows,
-                 color_limits=c(-2,2))
-
-combined_plot <- (size_bubble_plot  +
-                    theme(axis.title.x = element_blank(),
-                          axis.title.y = element_blank(),
-                          legend.position = "none") ) + 
-                    ( bubble_plot +
-                        xlab("Channel") + 
-                        theme(axis.text.y=element_blank()) ) + 
-                    plot_layout(widths=c(1,22))
-combined_plot
-
-ggsave(plot = combined_plot,filename = file.path(plot_dir,paste0("unnormalised_dot_plot_",current_treatment,".pdf")),width=10,height=5,units="cm")
-ggsave_cairo(plot = combined_plot,filename = file.path(plot_dir,paste0("unnormalised_dot_plot_",current_treatment,".png")),width=10,height=5,units="cm",dpi=600)
-
-
-# Plot normalised
-to_plot <- fold_changes_to_plot %>%
-  filter(treatment==current_treatment) %>%
-  filter(comparison=="relative_to_all")
-sizes_to_plot <- size_fold_changes_to_plot %>%
-  filter(treatment==current_treatment) %>%
-  filter(comparison=="relative_to_all") %>%
-  mutate(axis_label="Fraction of\npixels")
-
-bubble_plot <- make_bubble_plot(fold_changes = to_plot,
-                                plot_var = log2_fold_change,
-                                col_var = channel_name,
-                                row_var = cluster,
-                                col_order=cols,
-                                row_order=rows,
-                                color_limits=c(-1,1))
-
-size_bubble_plot <- make_bubble_plot(fold_changes = sizes_to_plot,
-                                     plot_var = log2_fold_change,
-                                     col_var = axis_label,
-                                     row_var = cluster,
-                                     row_order=rows,
-                                     color_limits=c(-1,1))
-
-combined_plot <- (size_bubble_plot  +
-                    theme(axis.title.x = element_blank(),
-                          axis.title.y = element_blank(),
-                          legend.position = "none") ) + 
-  ( bubble_plot +
-      xlab("Channel") + 
-      theme(axis.text.y=element_blank()) ) + 
-  plot_layout(widths=c(1,22))
-combined_plot
-
-ggsave(plot = combined_plot,filename = file.path(plot_dir,paste0("normalised_dot_plot_",current_treatment,".pdf")),width=10,height=5,units="cm")
-ggsave_cairo(plot = combined_plot,filename = file.path(plot_dir,paste0("normalised_dot_plot_",current_treatment,".png")),width=10,height=5,units="cm",dpi=600)
-
-
+# Loop over all treatments
+all_treatments <- unique(fold_changes_to_plot$treatment)
+for (current_treatment in all_treatments) {
+  
+  # Plot unnormalised
+  to_plot <- fold_changes_to_plot %>%
+    filter(treatment==current_treatment) %>%
+    filter(comparison=="unnormalised")
+  cols <- hclust_cols(to_plot)
+  rows <- hclust_rows(to_plot)
+  sizes_to_plot <- size_fold_changes_to_plot %>%
+    filter(treatment==current_treatment) %>%
+    filter(comparison=="unnormalised") %>%
+    mutate(axis_label="Number of\npixels")
+  
+  bubble_plot <- make_bubble_plot(fold_changes = to_plot,
+                                  plot_var = log2_fold_change,
+                                  col_var = channel_name,
+                                  row_var = cluster,
+                                  col_order=cols,
+                                  row_order=rows,
+                                  color_limits=c(-2,2))
+  
+  size_bubble_plot <- make_bubble_plot(fold_changes = sizes_to_plot,
+                                       plot_var = log2_fold_change,
+                                       col_var = axis_label,
+                                       row_var = cluster,
+                                       row_order=rows,
+                                       color_limits=c(-2,2))
+  
+  combined_plot <- (size_bubble_plot  +
+                      theme(axis.title.x = element_blank(),
+                            axis.title.y = element_blank(),
+                            legend.position = "none") ) + 
+    ( bubble_plot +
+        xlab("Channel") + 
+        theme(axis.text.y=element_blank(),
+              axis.ticks.y=element_blank()) ) + 
+    plot_layout(widths=c(1,22))
+  combined_plot
+  
+  ggsave(plot = combined_plot,filename = file.path(plot_dir,paste0("unnormalised_dot_plot_",current_treatment,".pdf")),width=10,height=5,units="cm")
+  ggsave_cairo(plot = combined_plot,filename = file.path(plot_dir,paste0("unnormalised_dot_plot_",current_treatment,".png")),width=10,height=5,units="cm",dpi=600)
+  
+  
+  # Plot normalised
+  to_plot <- fold_changes_to_plot %>%
+    filter(treatment==current_treatment) %>%
+    filter(comparison=="relative_to_all")
+  sizes_to_plot <- size_fold_changes_to_plot %>%
+    filter(treatment==current_treatment) %>%
+    filter(comparison=="relative_to_all") %>%
+    mutate(axis_label="Fraction of\npixels")
+  
+  bubble_plot <- make_bubble_plot(fold_changes = to_plot,
+                                  plot_var = log2_fold_change,
+                                  col_var = channel_name,
+                                  row_var = cluster,
+                                  col_order=cols,
+                                  row_order=rows,
+                                  color_limits=c(-1,1))
+  
+  size_bubble_plot <- make_bubble_plot(fold_changes = sizes_to_plot,
+                                       plot_var = log2_fold_change,
+                                       col_var = axis_label,
+                                       row_var = cluster,
+                                       row_order=rows,
+                                       color_limits=c(-1,1))
+  
+  combined_plot <- (size_bubble_plot  +
+                      theme(axis.title.x = element_blank(),
+                            axis.title.y = element_blank(),
+                            legend.position = "none") ) + 
+    ( bubble_plot +
+        xlab("Channel") + 
+        theme(axis.text.y=element_blank(),
+              axis.ticks.y=element_blank()) ) + 
+    plot_layout(widths=c(1,22))
+  combined_plot
+  
+  ggsave(plot = combined_plot,filename = file.path(plot_dir,paste0("normalised_dot_plot_",current_treatment,".pdf")),width=10,height=5,units="cm")
+  ggsave_cairo(plot = combined_plot,filename = file.path(plot_dir,paste0("normalised_dot_plot_",current_treatment,".png")),width=10,height=5,units="cm",dpi=600)
+  
+}
