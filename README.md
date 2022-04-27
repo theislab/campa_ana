@@ -1,19 +1,33 @@
 # Analysis of 4i data using CAMPA
-This repository contains scripts to recreate the models, results, and figures described in the CAMPA paper.
+This repository contains scripts to recreate the models, results, and figures described in the CAMPA manuscript (preprint on [bioRxiv]()).
+For the main documentation and tutorials, see the official [CAMPA documentation]().
 
 ## Setup
 - install and setup [campa](https://github.com/theislab/campa)
 - install campa_ana:
-```
-git clone https://github.com/theislab/campa_ana
-cd campa_ana
-pip install .
-```
-- download data + models (TODO)
-- update `camap.ini` to point to data and experiment folders
+  ```
+  git clone https://github.com/theislab/campa_ana
+  cd campa_ana
+  pip install .
+  ```
+- get data + models
+- update `campa.ini` to point to data and experiment folders, 
+  and add [NascentRNA](https://github.com/theislab/campa_ana/blob/main/NascentRNA_constants.py) `data_config`.
+  The `campa.ini` used to generate this data looked as follows:
+  ```
+  [DEFAULT]
+  data_dir = <path-to-data>
+  experiment_dir = <path-to-experiments>
+
+  [data]
+  NascentRNA = <path-to-campa_ana>/NascentRNA_constants.py
+
+  [co_occ]
+  co_occ_chunk_size = 1e7
+  ```
 
 ## Data
-TODO - how should data be provided and accessed. Which data to provide?
+Data and pre-trained models are available upon request. TODO add email.
 
 ## Structure of this repository
 - `campa_ana`: useful python functions

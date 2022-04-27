@@ -1,9 +1,9 @@
 # Constants for NascentRNA dataset
 import os
-from campa.constants import BASE_DATA_DIR
+from campa.constants import campa_config
 
 # --- dataset specific constants ---
-DATA_DIR = os.path.join(BASE_DATA_DIR, "NascentRNA_new")
+DATA_DIR = os.path.join(campa_config.BASE_DATA_DIR, "NascentRNA_new")
 DATASET_DIR = os.path.join(DATA_DIR, 'datasets')
 # name of column in metadata.csv that contains a unique object identifier
 OBJ_ID = 'mapobject_id'
