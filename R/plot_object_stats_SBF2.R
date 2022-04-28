@@ -322,7 +322,7 @@ DDX6_abundance <- DDX6_abundance_data %>%
   scale_fill_manual(values=c("#999999",cbPalette[3])) +
   boxplot_theme +
   coord_cartesian(ylim=c(0,4)) +
-  scale_y_continuous(name="DDX6 (Nucleus)", breaks=scales::pretty_breaks(n=3))
+  scale_y_continuous(name="DDX6 (Cytoplasm)", breaks=scales::pretty_breaks(n=3))
 DDX6_abundance
 
 DDX6_abundance_in_p_body_data <- campa_res %>%
