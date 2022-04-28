@@ -498,8 +498,8 @@ p_trends_size <- p_body_size_data %>%
   scale_fill_manual(values=c("#999999",cbPalette[3])) +
   scale_y_continuous(breaks=scales::pretty_breaks(n=3)) +
   coord_cartesian(ylim=c(0,NA),xlim=c(-1,20),expand = c(0,0)) +
-  ylab(bquote('P-body area('*µm^2*')')) +
-  #ylab("P-body area (µm^2)") +
+  #ylab(bquote('P-body area('*µm^2*')')) +
+  ylab("Individual\nP-body area") +
   xlab("Cell size (total protein content) bin") +
   theme_bw(base_size = 7) +
   theme(panel.spacing = unit(1,"mm"),
