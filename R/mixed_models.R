@@ -150,7 +150,7 @@ fit_mixed_model_per_CSL <- function(
   do_fit <- function() {
     model_fit <- nlme::lme(var ~ contrast_var * group_var, 
                            data = dat_local,
-                           # Uncorrelated compartment-specific random intercepts per well
+                           # Correlated compartment-specific random intercepts per well
                            random = list(random_effect = nlme::pdSymm(~ 0 + group_var)),
                            # Correlation between CSLs (groups) within a cell (object_id)
                            correlation = nlme::corSymm(form = ~ group_var_id | random_effect / object_id),   
