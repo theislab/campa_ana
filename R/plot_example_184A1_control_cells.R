@@ -122,15 +122,6 @@ selected_pixels <- pivot_longer(selected_pixels,cols = matches("\\d{2}_"),values
 #S = 231622,
 #G2 = 256562
 
-# calculate size
-selected_pixels_outlines %>% 
-  filter(mapobject_id==256562) %>%
-  ungroup() %>%
-  summarise(min_x = min(x), max_x = max(x),
-            min_y = min(y), max_y = max(y)) %>%
-  mutate(x_size = (max_x-min_x) *6.5/60,
-         y_size = (max_y-min_y) *6.5/60)
-
 selected_pixels_outlines <- selected_pixels %>%
   group_by(mapobject_id) %>%
   nest() %>%
@@ -141,6 +132,15 @@ selected_pixels_outlines <- selected_pixels %>%
   mutate(outline=T,y_new = x - 1, x_new = y - 1) %>%
   select(outline,y=y_new,x=x_new) %>%
   right_join(selected_pixels)
+
+# calculate size
+selected_pixels_outlines %>% 
+  filter(mapobject_id==256562) %>%
+  ungroup() %>%
+  summarise(min_x = min(x), max_x = max(x),
+            min_y = min(y), max_y = max(y)) %>%
+  mutate(x_size = (max_x-min_x) *6.5/60,
+         y_size = (max_y-min_y) *6.5/60)
 
 segmentation_images <- selected_pixels_outlines %>%
   group_by(mapobject_id) %>%
