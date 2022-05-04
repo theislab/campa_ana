@@ -356,8 +356,8 @@ to_plot %>%
                       mid = unit(0.1, "cm"),
                       long = unit(0.15, "cm")) +
   geom_hline(yintercept = 0,size=0.3) +
-  scale_fill_manual(values = getcolor_perturbation[levels(to_plot$treatment)],labels=c("Meayamycin","Unperturbed")) +
-  scale_color_manual(values = getcolor_perturbation[levels(to_plot$treatment)],labels=c("Meayamycin","Unperturbed")) +
+  scale_fill_manual(values = getcolor_perturbation[levels(to_plot$treatment)],labels=c("CX5461","Unperturbed")) +
+  scale_color_manual(values = getcolor_perturbation[levels(to_plot$treatment)],labels=c("CX5461","Unperturbed")) +
   theme_bw(base_size = 7) +
   theme(legend.title = element_blank(),
         legend.key.size = unit(3,"mm"),
