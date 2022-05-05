@@ -1,6 +1,6 @@
 source_python(file.path(campa_ana$constants$SOURCE_DIR,"NascentRNA_constants.py"))
 
-experiment_dir <- file.path(campa$constants$EXPERIMENT_DIR,experiment_name,"aggregated","full_data")
+experiment_dir <- file.path(campa$constants$campa_config$EXPERIMENT_DIR,experiment_name,"aggregated","full_data")
 campa_res_dirs <- list.dirs(experiment_dir) %>%
   tibble(campa_res_dir=.) %>%
   filter(grepl(cell_type,campa_res_dir)) %>%
