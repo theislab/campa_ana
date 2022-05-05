@@ -36,11 +36,10 @@ Data and pre-trained models are available upon request.
 ## Structure of this repository
 - `campa_ana`: useful python functions
 - `figure_notebooks`: ipython notebooks generating figures
-- `figure_notebooks_R`: R notebooks generating figures
 - `figures`: empty folder in which figures will be placed
 - `jterator`: param files needed for tissuemaps
 - `params`: param files needed for campa
-- `R`: useful R functions
+- `R`: useful R functions and R notebooks generating figures
 - `scripts`: executable scripts for running campa on HPC
 - `workflow`: notebooks explaining how to reproduce datasets, models, and clustering 
 
@@ -55,7 +54,7 @@ Notebooks in `workflow` reproduce our results.
 For more information on how to use CAMPA and different configuration options for each step, also have a look at the [CAMPA documentation](https://campa.readthedocs.io/en/stable/).
 
 ## Reproducing figures
-Notebooks in `figure_notebooks` and `figure_notebooks_R` reproduce figure panels for the CAMPA paper.
+Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA paper.
 
 - Figure 1
     - c,d: 
@@ -93,8 +92,3 @@ Notebooks in `figure_notebooks` and `figure_notebooks_R` reproduce figure panels
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
     - Figure 14 (heterogeneity of PML bodies)
         - `figure_notebooks/fig6_pml_umap.ipynb`
-
-        
-## Figure files
-- figures can be found [in this nextcloud folder](https://hmgubox2.helmholtz-muenchen.de/index.php/s/36PrZwt4cMniLfW)
-- sync figures: `rsync -rva hpc-submit01.scidom.de:/home/icb/hannah.spitzer/projects/pelkmans/software_new/campa_ana/figures/ ~/projects/pelkmans/software_new/campa_ana/figures --exclude=".*"`
