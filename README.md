@@ -1,9 +1,9 @@
 # Analysis of 4i data using CAMPA
 This repository contains scripts to recreate the models, results, and figures described in 
 our preprint 
-*"Quantifying condition-dependent changes in subcellular organisation using multiplexed protein maps"* 
+*"Learning consistent subcellular landmarks to quantify changes in multiplexed protein maps"* 
 ([Spitzer, Berry et al. (2022]()).
-For the main documentation and tutorials, see the official [CAMPA documentation](https://campa.readthedocs.io/en/stable/).
+For the main documentation and tutorials, see the official [CAMPA documentation](https://campa.readthedocs.io/).
 
 ## Setup
 - install and setup [campa](https://github.com/theislab/campa)
@@ -51,7 +51,7 @@ Notebooks in `workflow` reproduce our results.
 - `04_cluster`: cluster latent representation into CSLs and annotate (manually).
 - `05_extract_features_all` and `05_extract_features_SBF2`: extract intensity and spatial features from cells using CSLs
 
-For more information on how to use CAMPA and different configuration options for each step, also have a look at the [CAMPA documentation](https://campa.readthedocs.io/en/stable/).
+For more information on how to use CAMPA and different configuration options for each step, also have a look at the [CAMPA documentation](https://campa.readthedocs.io/).
 
 ## Reproducing figures
 Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA paper.
