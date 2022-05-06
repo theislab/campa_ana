@@ -52,7 +52,7 @@ Notebooks in `workflow` reproduce our results.
 - `04_cluster`: cluster latent representation into CSLs and annotate (manually).
 - `05_extract_features_all` and `05_extract_features_SBF2`: extract intensity and spatial features from cells using CSLs
 
-For more information on how to use CAMPA and different configuration options for each step, also have a look at the [CAMPA documentation](https://campa.readthedocs.io/en/stable/).
+For more information on how to use CAMPA and different configuration options for each step, also have a look at the [CAMPA documentation](https://campa.readthedocs.io/).
 
 ## Reproducing figures
 Notebooks in `figure_notebooks` and `figure_notebooks_R` reproduce figure panels for the CAMPA paper.
@@ -93,8 +93,3 @@ Notebooks in `figure_notebooks` and `figure_notebooks_R` reproduce figure panels
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
     - Figure 14 (heterogeneity of PML bodies)
         - `figure_notebooks/fig6_pml_umap.ipynb`
-
-        
-## Figure files
-- figures can be found [in this nextcloud folder](https://hmgubox2.helmholtz-muenchen.de/index.php/s/36PrZwt4cMniLfW)
-- sync figures: `rsync -rva hpc-submit01.scidom.de:/home/icb/hannah.spitzer/projects/pelkmans/software_new/campa_ana/figures/ ~/projects/pelkmans/software_new/campa_ana/figures --exclude=".*"`
