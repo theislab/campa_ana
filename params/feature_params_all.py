@@ -13,14 +13,14 @@ feature_params = {
     # data dirs to be processed. 
     # Relative to experiment_dir/aggregated/full_data. 
     # If None, all available data_dirs will be processed
-    'data_dirs': ["184A1_unperturbed/I09"],
-    #'data_dirs': [
-    #    "184A1_unperturbed/I09", "184A1_unperturbed/I11", "184A1_unperturbed/J10", "184A1_unperturbed/J12", 
-    #    "184A1_DMSO/I14", "184A1_DMSO/J16", "184A1_AZD4573/I13", "184A1_AZD4573/I17", "184A1_AZD4573/J14",
-    #    "184A1_AZD4573/J18", "184A1_AZD4573/J21", "184A1_CX5461/I18", "184A1_CX5461/J09", "184A1_CX5461/J22",
-    #    "184A1_TSA/I16", "184A1_TSA/J13", "184A1_TSA/J20", "184A1_triptolide/I10", "184A1_triptolide/J15",
-    #    "184A1_meayamycin/I12", "184A1_meayamycin/I20"
-    #    ],
+    #'data_dirs': ["184A1_unperturbed/I09"],
+    'data_dirs': [
+        "184A1_unperturbed/I09", "184A1_unperturbed/I11", "184A1_unperturbed/J10", "184A1_unperturbed/J12",
+        "184A1_DMSO/I14", "184A1_DMSO/J16", "184A1_AZD4573/I13", "184A1_AZD4573/I17", "184A1_AZD4573/J14",
+        "184A1_AZD4573/J18", "184A1_AZD4573/J21", "184A1_CX5461/I18", "184A1_CX5461/J09", "184A1_CX5461/J22",
+        "184A1_TSA/I16", "184A1_TSA/J13", "184A1_TSA/J20", "184A1_triptolide/I10", "184A1_triptolide/J15",
+        "184A1_meayamycin/I12", "184A1_meayamycin/I20"
+        ],
     # filename to use for saving extracted features.
     'save_name': None,
     # force calculation even when adata exists
@@ -40,7 +40,7 @@ feature_params = {
         # use log spacing of co-occurrence intervals
         'logspace': True,
         # number of processes to use to compute co-occurrence scores
-        'num_processes': 8
+        'num_processes': None
     },
     # parameters for object-stats calculation
     'object_stats_params': {
@@ -57,14 +57,13 @@ feature_params = {
 variable_feature_params = [
     # intensity features for base clustering
     {
-        'save_name': 'features_temp.h5ad',
+        'save_name': 'features.h5ad',
         'features': ['intensity'],
     },
     # intensity + co-occurrence + object stats for annotated clustering
     {
-        'save_name': 'features_annotation_temp.h5ad',
+        'save_name': 'features_annotation.h5ad',
         'cluster_col': 'annotation',
         'features': ['intensity', 'co-occurrence', 'object-stats'],
-
     }
 ]
