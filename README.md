@@ -1,7 +1,7 @@
 # Analysis of 4i data using CAMPA
 This repository contains scripts to recreate the models, results, and figures described in 
 our preprint 
-*"Quantifying condition-dependent changes in subcellular organisation using multiplexed protein maps"* 
+*"Learning consistent subcellular landmarks to quantify changes in multiplexed protein maps"* 
 ([Spitzer, Berry et al. (2022]()).
 For the main documentation and tutorials, see the official [CAMPA documentation](https://campa.readthedocs.io/en/stable/).
 
