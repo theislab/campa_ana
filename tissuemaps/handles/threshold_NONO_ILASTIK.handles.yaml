@@ -1,0 +1,29 @@
+---
+input:
+- help: Image that should be thresholded.
+  key: 18_NONO_ILASTIK
+  name: image
+  type: IntensityImage
+- help: 'Threshold level. Values above threshold will be assigned to foreground and
+    values below or equal to threshold to background.
+
+    '
+  name: threshold
+  type: Scalar
+  value: 40000
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: 'Binary image where pixels above threshold are assigned to foreground and
+    pixels below threshold to background.
+
+    '
+  key: NONO_ILASTIK.mask
+  name: mask
+  type: BinaryImage
+- help: ''
+  name: figure
+  type: Figure
+version: 0.0.2

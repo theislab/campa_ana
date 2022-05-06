@@ -1,0 +1,27 @@
+---
+input:
+- help: Image to be masked
+  key: C23_ILASTIK.filtered_mask
+  name: image
+  type: Image
+- help: Mask to apply
+  key: cells.relabeled_image
+  name: mask
+  type: MaskImage
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+- help: Should objects or intensities by displayed?
+  name: plot_type
+  type: Scalar
+  value: objects
+output:
+- help: Masked image
+  key: C23_ILASTIK_Cells.masked_image
+  name: masked_image
+  type: Image
+- help: ''
+  name: figure
+  type: Figure
+version: 0.2.0

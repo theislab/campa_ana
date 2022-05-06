@@ -1,0 +1,43 @@
+---
+input:
+- help: 'Labeled image with registered objects for which intensity features should
+    be extracted.
+
+    '
+  key: Cells
+  name: extract_objects
+  type: SegmentedObjects
+- help: 'Labeled image with registered objects to which intensity features should
+    be assigned. "extract_objects" and "assign_objects" must have a one-to-one relationship
+
+    '
+  key: Cells
+  name: assign_objects
+  type: SegmentedObjects
+- help: 'Distance (in pixels) between objects to be considered neighbours
+
+    '
+  name: neighbour_distance
+  type: Scalar
+  value: 10
+- help: 'Distance (in pixels) between objects to be considered "touching"
+
+    '
+  name: touching_distance
+  type: Scalar
+  value: 6
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- channel_ref: null
+  help: Extracted neighbour features.
+  name: measurements
+  objects: assign_objects
+  objects_ref: extract_objects
+  type: Measurement
+- help: ''
+  name: figure
+  type: Figure
+version: 0.0.1

@@ -1,0 +1,29 @@
+---
+input:
+- help: Image that should be labeled.
+  key: nucleoplasm.combined_mask
+  name: mask
+  type: MaskImage
+- help: 'Number of neighborhood pixels considered to decide whether components are
+    connected.
+
+    '
+  name: connectivity
+  type: Numeric
+  value: 8
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: 'Labeled image with pixels of each connected component having a unique non-zero
+    value.
+
+    '
+  key: nucleoplasm.label_image
+  name: label_image
+  type: LabelImage
+- help: ''
+  name: figure
+  type: Figure
+version: 0.1.0

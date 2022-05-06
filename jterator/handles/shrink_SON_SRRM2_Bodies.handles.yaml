@@ -1,0 +1,24 @@
+---
+input:
+- help: Labeled image with objects should be expanded or shrunk.
+  key: SON_SRRM2_Nucleus.label_image
+  name: image
+  type: LabelImage
+- help: Number of pixel by which each object should be expanded (use negative values
+    to shrink objects).
+  name: n
+  type: Numeric
+  value: -5
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Expanded image.
+  key: SON_SRRM2_Nucleus.shrunk_image
+  name: expanded_image
+  type: LabelImage
+- help: Comparison of "image" and "expanded_image".
+  name: figure
+  type: Figure
+version: 0.1.1

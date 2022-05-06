@@ -1,0 +1,27 @@
+---
+input:
+- help: Image to be masked
+  key: SON_ILASTIK.filtered_mask
+  name: image
+  type: Image
+- help: Mask to apply
+  key: nuclei_from_cells.masked_image
+  name: mask
+  type: MaskImage
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+- help: Should objects or intensities by displayed?
+  name: plot_type
+  type: Scalar
+  value: objects
+output:
+- help: Masked image
+  key: SON_ILASTIK_Nuclei.masked_image
+  name: masked_image
+  type: Image
+- help: ''
+  name: figure
+  type: Figure
+version: 0.2.0

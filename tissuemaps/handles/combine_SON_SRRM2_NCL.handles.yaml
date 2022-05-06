@@ -1,0 +1,29 @@
+---
+input:
+- help: First mask.
+  key: C23_ILASTIK_Nuclei.masked_image
+  name: mask_1
+  type: MaskImage
+- help: Second mask.
+  key: SRRM2_SON.combined_mask
+  name: mask_2
+  type: MaskImage
+- help: name of the logical operation to be applied. Use AND for only getting the
+    overlap, OR for getting areas where either mask is or EXCLUSIVE_OR for getting
+    a mask where there is one but not the other mask.
+  name: logical_operation
+  type: Scalar
+  value: OR
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: true
+output:
+- help: Combined mask.
+  key: NCL_SON_SRRM2.combined_mask
+  name: combined_mask
+  type: BinaryImage
+- help: Comparison of input and output masks.
+  name: figure
+  type: Figure
+version: 0.0.2

@@ -1,0 +1,21 @@
+---
+input:
+- help: 'Mask with holes in connected pixel components that should be filled.
+
+    '
+  key: dapi_with_cell_outlines_masked.mask
+  name: mask
+  type: BinaryImage
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Binary image with holes in connected components filled.
+  key: dapi_with_cell_outlines_masked.filled_mask
+  name: filled_mask
+  type: BinaryImage
+- help: ''
+  name: figure
+  type: Figure
+version: 0.0.1

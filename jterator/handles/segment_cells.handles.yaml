@@ -1,0 +1,53 @@
+---
+input:
+- help: 'Labeled image encoding primary objects that should be used as seeds for the
+    detection of secondary objects.
+
+    '
+  key: expanded_seeds_into_cytoplasm.secondary_label_image
+  name: primary_label_image
+  type: LabelImage
+- help: 'Grayscale image that should be used to find the outlines of secondary objects.
+
+    '
+  key: tub1a1_ctnnb1_crt_se.combined_image
+  name: intensity_image
+  type: IntensityImage
+- help: 'Contrast threshold for automatic separation of foreground from background
+    based on locally adaptive thresholding (when 0 defaults to manual threshold using
+    "min_threshold" and "max_threshold").
+
+    '
+  name: contrast_threshold
+  type: Numeric
+  value: 0
+- help: 'Minimal foreground value to default to; pixels below this value are considered
+    background.
+
+    '
+  name: min_threshold
+  type: Numeric
+  value: 109
+- help: 'Maximal background value to default to; pixels above this value are considered
+    foreground.
+
+    '
+  name: max_threshold
+  type: Numeric
+  value: 109
+- help: Should a figure be created?
+  name: plot
+  type: Plot
+  value: false
+output:
+- help: Labeled image encoding secondary objects.
+  key: cells.secondary_label_image
+  name: secondary_label_image
+  type: LabelImage
+- help: 'Comparison of "primary_label_image" and "secondary_label_image". Also shows
+    outlines of objects in "secondary_label_image" on "intensity_image".
+
+    '
+  name: figure
+  type: Figure
+version: 0.0.3

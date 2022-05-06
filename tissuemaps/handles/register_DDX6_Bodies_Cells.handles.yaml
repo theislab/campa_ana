@@ -1,0 +1,21 @@
+---
+input:
+- help: 'Binary or labeled mask image containing the objects (connected pixel components)
+    that should be registered.
+
+    '
+  key: DDX6_Ilastik_Cells.label_image
+  name: mask
+  type: MaskImage
+- help: 'Should objects be relabeled on registration.
+
+    '
+  name: relabel
+  type: Boolean
+  value: false
+output:
+- help: Name that should be given to the objects in "mask".
+  key: DDX6_Bodies_Cells
+  name: objects
+  type: SegmentedObjects
+version: 0.2.0
