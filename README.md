@@ -3,7 +3,7 @@ This repository contains scripts to recreate the models, results, and figures de
 our preprint 
 *"Learning consistent subcellular landmarks to quantify changes in multiplexed protein maps"* 
 ([Spitzer, Berry et al. (2022]()).
-For the main documentation and tutorials, see the official [CAMPA documentation](https://campa.readthedocs.io/en/stable/).
+For the main documentation and tutorials, see the official [CAMPA documentation](https://campa.readthedocs.io/).
 
 ## Setup
 - install and setup [campa](https://github.com/theislab/campa)
