@@ -30,7 +30,7 @@ For the main documentation and tutorials, see the official [CAMPA documentation]
   ```
 
 ## Data
-CSL-derived features from the 184A1 and the HeLa datasets are available [here](https://doi.org/​​10.6084/m9.figshare.19699651).
+CSL-derived features from the 184A1 and the HeLa datasets are available [here](https://doi.org/10.6084/m9.figshare.19699651).
 Data and pre-trained models are available upon request. 
 
 ## Structure of this repository
