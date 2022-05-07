@@ -101,7 +101,8 @@ Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA pa
         - `R/plot_co_occurrence_184A1.R`
     - Figure 9 (co-occurrence 184A1)
         - `R/plot_co_occurrence_184A1.R`
-    - Figure 10
+    - Figure 10 (UMAP outliers)
+        - `figure_notebooks/fig4_suppl_UMAP_outliers.ipynb`
     - Figure 11 (cluster loadings SBF2)
         - `R/cluster_loadings_SBF2.R`
     - Figure 12 
