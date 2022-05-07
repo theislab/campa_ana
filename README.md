@@ -57,21 +57,32 @@ For more information on how to use CAMPA and different configuration options for
 Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA paper.
 
 - Figure 1
-    - c,d: 
+    - c,d: `R/whole_nucleus_fold_change.R`
     - e,f,g,h: `figure_notebooks/fig1_umap_linear_classifier.ipynb`
 - Figure 2
+    - a:
+    - b,d-i: `R/plot_example_184A1_control_cells.R`
+    - c: `R/cluster_loadings_184A1.R`
 - Figure 3
+    - a,b: `R/fit_mixed_models.R` and `R/make_bubble_plots.R`
+    - c-f: `R/plot_example_184A1_meayamycin_cell.R`
+    - h,i: `R/plot_co_occurrence_184A1.R`
 - Figure 4
     - a-g: `figure_notebooks/fig4_perturbation_comparison.ipynb`
-    - h:
-    - i:
+    - h,i: `R/plot_co_occurrence_184A1.R`
     - j: `figure_notebooks/fig4_object_features_CX4561.ipynb`
-    - k:
+    - k: `R/plot_example_184A1_cx5461_cell.R`
 - Figure 5
+    - a,c: `R/plot_example_SBF2_cells.R`
+    - b: `R/cluster_loadings_SBF2.R`
+    - d: `R/fit_mixed_models_SBF2.R` and `R/make_bubble_plots_SBF2.R`
+    - e-h: `R/plot_object_stats_SBF2.R`
 - Figure 6
+    - b-c: `R/fit_mixed_model_EU_bin.R` and `R/make_bubble_plots_EU_bin.R`
+    - d-f: `R/plot_trends_and_examples_EU_heterogeneity.R`
 
 - Supplements:
-    - Figure 1
+    - Figure 1: N/A
     - Figure 2 (noise robustness)
         - a: `figure_notebooks/fig1_suppl_noise_robustness.ipynb`
         - b,c: `figure_notebooks/fig1_suppl_cluster_subsampling.ipynb`
@@ -79,16 +90,26 @@ Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA pa
         - `figure_notebooks/fig1_umap_linear_classifier.ipynb`
     - Figure 4 (cell-cycle dependent pixel clustering)
         - `figure_notebooks/fig1_suppl_umap_cluster_size_cell_cycle.ipynb`
-    - Figure 5
-    - Figure 6
-    - Figure 7
-    - Figure 8
-    - Figure 9
+        - `R/plot_example_184A1_control_cells.R`
+    - Figure 5 (cluster loadings)
+        - `R/cluster_loadings_184A1.R`
+    - Figure 6 (ilastik comparison)
+        - `R/compare_CSL_with_ilastik.R`
+    - Figure 7 (DMSO bubble-plot)
+        - `R/fit_mixed_models_DMSO.R` and `R/make_bubble_plots_DMSO.R`
+    - Figure 8 (co-occurrence 184A1)
+        - `R/plot_co_occurrence_184A1.R`
+    - Figure 9 (co-occurrence 184A1)
+        - `R/plot_co_occurrence_184A1.R`
     - Figure 10
-    - Figure 11
-    - Figure 12 (object filtering: scatter plots)
+    - Figure 11 (cluster loadings SBF2)
+        - `R/cluster_loadings_SBF2.R`
+    - Figure 12 
+        - `R/fit_mixed_models_SBF2.R` and `R/make_bubble_plots_SBF2.R`
+        - `R/plot_object_stats_SBF2.R`
+    - Figure 13 (object filtering: scatter plots)
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
-    - Figure 13 (object filtering: example cells)
+    - Figure 14 (object filtering: example cells)
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
-    - Figure 14 (heterogeneity of PML bodies)
+    - Figure 15 (heterogeneity of PML bodies)
         - `figure_notebooks/fig6_pml_umap.ipynb`
