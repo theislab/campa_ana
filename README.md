@@ -2,7 +2,7 @@
 This repository contains scripts to recreate the models, results, and figures described in 
 our preprint 
 *"Learning consistent subcellular landmarks to quantify changes in multiplexed protein maps"* 
-([Spitzer, Berry et al. (2022]()).
+([Spitzer, Berry et al. (2022](https://www.biorxiv.org/content/10.1101/2022.05.07.490900v1)).
 For the main documentation and tutorials, see the official [CAMPA documentation](https://campa.readthedocs.io/).
 
 ## Setup
