@@ -14,11 +14,10 @@
 
 # set up
 source ~/.bashrc
-conda activate pelkmans-3.9
+conda activate campa
 
 # run script
-BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
-SCRIPT=$BASE/campa/cli/train.py
+BASE=/lustre/home/icb/hannah.spitzer/projects/pelkmans/software_new
 
 # train, evaluate, and compare all experiments
 campa train all --config $BASE/campa_ana/params/experiment_params_all.py

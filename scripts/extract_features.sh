@@ -14,7 +14,6 @@ source ~/.bashrc
 conda activate pelkmans-3.9
 
 # run script
-BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
 
 # calculate features for VAE_all experiment according to feature_params_all.py
 campa extract_features $BASE/campa_ana/params/feature_params_all.py

@@ -11,7 +11,7 @@
 #SBATCH --nice=10000
 
 source ~/.bashrc
-conda activate pelkmans-3.9
+conda activate campa
 
 # VAE_all experiment
 # create subsampled mpp_cluster data

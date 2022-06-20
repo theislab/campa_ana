@@ -11,11 +11,9 @@
 
 # set up
 source ~/.bashrc
-conda activate pelkmans-3.9
+conda activate campa
 
 # run script
-BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
-
 campa create_dataset $BASE/campa_ana/params/data_params_all.py
 campa create_dataset $BASE/campa_ana/params/data_params_all_noneigh.py
 campa create_dataset $BASE/campa_ana/params/data_params_SBF2.py
