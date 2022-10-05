@@ -13,25 +13,14 @@ For the main documentation and tutorials, see the official [CAMPA documentation]
   cd campa_ana
   pip install .
   ```
-- get data + models
-- update `campa.ini` to point to data and experiment folders, 
-  and add [NascentRNA](https://github.com/theislab/campa_ana/blob/main/NascentRNA_constants.py) `data_config`.
-  The `campa.ini` used to generate this data looked as follows:
-  ```
-  [DEFAULT]
-  data_dir = <path-to-data>
-  experiment_dir = <path-to-experiments>
-
-  [data]
-  NascentRNA = <path-to-campa_ana>/NascentRNA_constants.py
-
-  [co_occ]
-  co_occ_chunk_size = 1e7
-  ```
+- update `campa.ini` and download data by executing [00_setup_and_download_data.ipynb](TODO)
 
 ## Data
 CSL-derived features from the 184A1 and the HeLa datasets are available [here](https://doi.org/10.6084/m9.figshare.19699651).
-Data and pre-trained models are available upon request. 
+Data and pre-trained models are available in the following Zenodo repositories: 
+    - TODO
+    - TODO
+See [00_setup_and_download_data](TODO) for more information on the provided data. 
 
 ## Structure of this repository
 - `campa_ana`: useful python functions
@@ -45,6 +34,7 @@ Data and pre-trained models are available upon request.
 
 ## Reproducing results
 Notebooks in `workflow` reproduce our results. 
+- `00_setup_and_download_data`: start here for setup and downloading provided data
 - `01_prepare_data`: download data from TissueMaps and preprocess metadata files
 - `02_create_dataset`: create datasets for training and validation of cVAE models
 - `03_train`: train cVAE models

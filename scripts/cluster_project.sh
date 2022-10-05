@@ -20,6 +20,6 @@ campa cluster VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir ag
 
 # VAE_SBF2 experiment
 # project clustering
-#campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed1"
-#campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed2"
-#campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed3"
+campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed1"
+campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed2"
+campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed3"
