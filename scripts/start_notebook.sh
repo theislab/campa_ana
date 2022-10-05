@@ -16,7 +16,7 @@ source ~/.bashrc
 conda activate cama
 
 # run script
-BASE=/lustre/home/icb/hannah.spitzer/projects/pelkmans/software_new
+BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
 # prevent othher people from reading the log file
 chmod og-r start_notebook_${SLURM_JOB_ID}.out
 jupyter-lab --no-browser --ip 0.0.0.0 --notebook-dir $BASE

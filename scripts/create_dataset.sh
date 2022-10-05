@@ -13,6 +13,7 @@
 source ~/.bashrc
 conda activate campa
 
+BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
 # run script
 campa create_dataset $BASE/campa_ana/params/data_params_all.py
 campa create_dataset $BASE/campa_ana/params/data_params_all_noneigh.py
