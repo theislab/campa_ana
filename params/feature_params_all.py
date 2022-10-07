@@ -55,15 +55,27 @@ feature_params = {
 # use this list to extract several different features at once.
 # final feature params for entry i are obtained by `feature_params.update(variable_feature_params[i])`
 variable_feature_params = [
-    # intensity features for base clustering
-    {
-        'save_name': 'features.h5ad',
-        'features': ['intensity'],
-    },
-    # intensity + co-occurrence + object stats for annotated clustering
-    {
-        'save_name': 'features_annotation.h5ad',
-        'cluster_col': 'annotation',
-        'features': ['intensity', 'co-occurrence', 'object-stats'],
-    }
+    ## intensity features for base clustering
+    #{
+    #    'save_name': 'features.h5ad',
+    #    'features': ['intensity'],
+    #},
+    ## intensity + co-occurrence + object stats for annotated clustering
+    #{
+    #    'save_name': 'features_annotation.h5ad',
+    #    'cluster_col': 'annotation',
+    #    'features': ['intensity', 'co-occurrence', 'object-stats'],
+    #}
 ]
+
+# intensity features for MPPleiden
+for res in [1.6, 2.0]: #[0.2, 0.4, 0.6, 0.8, 1.2, 1.6, 2.0]:
+    variable_feature_params.append(
+        {
+            'experiment_dir': 'VAE_all/MPPleiden',
+            'cluster_name': f"clustering_res{res:0.1f}",
+            'save_name': f'features_clustering_res{res:0.1f}.h5ad',
+            'features': ['intensity'],
+            'force': True,
+        }
+    )

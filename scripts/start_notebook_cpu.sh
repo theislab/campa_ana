@@ -9,6 +9,7 @@
 ##SBATCH --mem=127G
 #SBATCH -t 10:00:00
 #SBATCH --nice=10000
+#SBATCH --exclude=ibis216-010-[005,007,068-071]
 
 # set up
 source ~/.bashrc

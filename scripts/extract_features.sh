@@ -11,7 +11,7 @@
 
 # set up
 source ~/.bashrc
-conda activate pelkmans-3.9
+conda activate campa
 
 # run script
 BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
