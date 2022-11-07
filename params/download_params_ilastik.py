@@ -1,4 +1,7 @@
 # --- download parameters for downloading all used NascentRNA data from tissuemaps ---
+# This config downloads extra channels from ILASTIK workflow 
+# (containing manual nuclear speckle and PML body segmentations)
+# 
 # name of data config for determining where data should be saved
 data_config = "NascentRNA"
 # path to tm credentials file

@@ -15,34 +15,32 @@ conda activate campa
 
 # VAE_all experiment
 # create subsampled mpp_cluster data
-#for exp in VAE CondVAE_pert-CC MPPleiden; do
-#    campa cluster VAE_all/$exp create --subsample --frac 0.001 --save-dir aggregated/sub-0.001
-#done
+for exp in VAE CondVAE_pert-CC MPPleiden; do
+    campa cluster VAE_all/$exp create --subsample --frac 0.001 --save-dir aggregated/sub-0.001
+done
 
 # prepare full dataset for projecting clustering to
-#for exp in VAE CondVAE_pert-CC MPPleiden; do
-#    campa cluster VAE_all/$exp prepare-full --save-dir aggregated/full_data
-#done
+for exp in VAE CondVAE_pert-CC MPPleiden; do
+    campa cluster VAE_all/$exp prepare-full --save-dir aggregated/full_data
+done
 
 # VAE_SBF2 experiment
 # create subsampled mpp_cluster data
-#for exp in VAE CondVAE_siRNA-CC MPPleiden; do
-#    campa cluster VAE_SBF2/$exp create --subsample --frac 0.005 --save-dir aggregated/sub-0.005
-#done
+for exp in VAE CondVAE_siRNA-CC MPPleiden; do
+    campa cluster VAE_SBF2/$exp create --subsample --frac 0.005 --save-dir aggregated/sub-0.005
+done
 
 # prepare full dataset for projecting clustering to
-#for exp in VAE CondVAE_siRNA-CC MPPleiden; do
-#    campa cluster VAE_SBF2/$exp prepare-full --save-dir aggregated/full_data
-#done
+for exp in VAE CondVAE_siRNA-CC MPPleiden; do
+    campa cluster VAE_SBF2/$exp prepare-full --save-dir aggregated/full_data
+done
 
 # ablation studies
 #for exp in CondVAE_pert-CC_noneigh CondVAE_pert-CC_neigh5 CondVAE_pert-CC_neigh7; do
 #    campa cluster VAE_all/$exp create --subsample --frac 0.001 --save-dir aggregated/sub-0.001
-    # TODO maybe not needed, might be possible to manually predict this for the few example cells needed
-    #campa cluster VAE_all/$exp prepare-full --save-dir aggregated/full_data
 #done
 
 # prediction of HeLa data with VAE_all/CondVAE_pert-CC
-campa cluster VAE_all/CondVAE_pert-CC prepare-full --data-dirs 'HeLa_SBF2/K18' 'HeLa_SBF2/L19' \
-    'HeLa_SBF2/M18' 'HeLa_scrambled/K19' 'HeLa_scrambled/L18' 'HeLa_scrambled/M19' \
-    --save-dir aggregated_HeLa/full_data
+#campa cluster VAE_all/CondVAE_pert-CC prepare-full --data-dirs 'HeLa_SBF2/K18' 'HeLa_SBF2/L19' \
+#    'HeLa_SBF2/M18' 'HeLa_scrambled/K19' 'HeLa_scrambled/L18' 'HeLa_scrambled/M19' \
+#    --save-dir aggregated_HeLa/full_data
