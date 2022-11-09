@@ -20,12 +20,6 @@ conda activate campa
 BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
 
 # train, evaluate, and compare all experiments
-#campa train trainval --config $BASE/campa_ana/params/experiment_params_all.py
-#campa train all --config $BASE/campa_ana/params/experiment_params_SBF2.py
-
-# code for evaluation + comparison only:
-#campa train evaluate --experiment-dir VAE_all
-campa train compare --experiment-dir VAE_all # --exp-name MPPleiden VAE CondVAE_pert-CC 
-#campa train evaluate --experiment-dir VAE_SBF2
-#campa train compare --experiment-dir VAE_SBF2
+campa train all --config $BASE/campa_ana/params/experiment_params_all.py
+campa train all --config $BASE/campa_ana/params/experiment_params_SBF2.py
 

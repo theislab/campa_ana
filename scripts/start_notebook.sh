@@ -10,6 +10,7 @@
 #SBATCH --nice=10000
 #SBATCH --qos=gpu
 #SBATCH --exclude=icb-gpusrv0[1-2]
+#SBATCH --nodelist=supergpu02pxe
 
 # set up
 source ~/.bashrc
