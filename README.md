@@ -13,14 +13,15 @@ For the main documentation and tutorials, see the official [CAMPA documentation]
   cd campa_ana
   pip install .
   ```
-- update `campa.ini` and download data by executing [00_setup_and_download_data.ipynb](TODO)
+- update `campa.ini` and download data by executing [00_setup_and_download_data.ipynb](workflow/00_setup_and_download_data.ipynb)
 
 ## Data
 CSL-derived features from the 184A1 and the HeLa datasets are available [here](https://doi.org/10.6084/m9.figshare.19699651).
 Data and pre-trained models are available in the following Zenodo repositories: 
-    - TODO
-    - TODO
-See [00_setup_and_download_data](TODO) for more information on the provided data. 
+    - Data: https://doi.org/10.5281/zenodo.7299516
+    - Pre-trained models: https://doi.org/10.5281/zenodo.7299750 
+    
+See [00_setup_and_download_data](workflow/00_setup_and_download_data.ipynb) for more information on the provided data. 
 
 ## Structure of this repository
 - `campa_ana`: useful python functions
