@@ -91,26 +91,36 @@ Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA pa
     - Figure 4 (cell-cycle dependent pixel clustering)
         - `figure_notebooks/fig1_suppl_umap_cluster_size_cell_cycle.ipynb`
         - `R/plot_example_184A1_control_cells.R`
-    - Figure 5 (cluster loadings)
-        - `R/cluster_loadings_184A1.R`
+    - Figure 5 (details of cVAE clustering)
+        - a: `R/cluster_loadings_184A1.R`
+        - b-e:
     - Figure 6 (ilastik comparison)
         - `R/compare_CSL_with_ilastik.R`
-    - Figure 7 (DMSO bubble-plot)
+    - Figure 7 (comparison with direct clustering)
+        - a,b: `R/cluster_loadings_direct_184A1.R`
+        - c: `R/plot_example_184A1_TSA_cell_direct.R`
+        - d: `R/plot_example_184A1_TSA_cell.R`
+        - e: `R/fit_mixed_models.R` and `R/make_bubble_plots.R`
+    - Figure 8 (bubble-plots)
+        - `R/fit_mixed_models.R` and `R/make_bubble_plots.R`
         - `R/fit_mixed_models_DMSO.R` and `R/make_bubble_plots_DMSO.R`
-    - Figure 8 (co-occurrence 184A1)
-        - `R/plot_co_occurrence_184A1.R`
     - Figure 9 (co-occurrence 184A1)
         - `R/plot_co_occurrence_184A1.R`
-    - Figure 10 (UMAP outliers)
+    - Figure 10 (co-occurrence 184A1)
+        - `R/plot_co_occurrence_184A1.R`
+    - Figure 11 (UMAP outliers)
         - `figure_notebooks/fig4_suppl_UMAP_outliers.ipynb`
-    - Figure 11 (cluster loadings SBF2)
-        - `R/cluster_loadings_SBF2.R`
-    - Figure 12 
+    - Figure 12 (cluster loadings SBF2)
+        - a: `R/cluster_loadings_SBF2.R`
+        - b: `R/plot_example_SBF2_cells_raw_csl.R`
+        - c/d/e:
+    - Figure 13 
         - `R/fit_mixed_models_SBF2.R` and `R/make_bubble_plots_SBF2.R`
+        - `R/fit_mixed_models_SBF2_raw_csl.R` and `R/make_bubble_plots_SBF2_raw_csl.R`
         - `R/plot_object_stats_SBF2.R`
-    - Figure 13 (object filtering: scatter plots)
+    - Figure 14 (object filtering: scatter plots)
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
-    - Figure 14 (object filtering: example cells)
+    - Figure 15 (object filtering: example cells)
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
-    - Figure 15 (heterogeneity of PML bodies)
+    - Figure 16 (heterogeneity of PML bodies)
         - `figure_notebooks/fig6_pml_umap.ipynb`
