@@ -132,7 +132,7 @@ make_bubble_plot <- function(dat,row_clustering=NULL,col_clustering=NULL,color_l
     xlab("Perturbation") +
     scale_radius(name = expression(italic(p)),
                  breaks = c(0,1,2),
-                 labels = c("<0.05","0.05","<0.01"),
+                 labels = c("< 0.05","0.05","< 0.01"),
                  range = c(0.8,2),
                  limits = c(0,2)) + 
     scale_colour_gradient2(name= expression(log[2](`fold-change`)),
@@ -158,7 +158,7 @@ all_pert_bubble <- make_bubble_plot(whole_nucleus_intensity_fold_changes,
 all_pert_bubble + theme(legend.position = "none")
 ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_vertical.pdf"),
        width=3.8,height=10,units="cm")
-ggsave_cairo(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot.png"),
+ggsave_cairo(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_vertical.png"),
              width=3.8,height=10,units="cm",dpi=600)
 
 # Save legend separately
@@ -171,6 +171,26 @@ tr <- ggtree(as.dendrogram(col_clustering),right=F,size=0.2)
 ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_tree_vertical_channels.pdf"),width=1,height=10,units="cm")
 tr <- ggtree(as.dendrogram(row_clustering),right=F,size=0.2)
 ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_tree_vertical_treatments.pdf"),width=1,height=3,units="cm")
+
+# Horizontal 
+all_pert_bubble + coord_flip() + theme(legend.position = "none")
+
+# Save PDF and PNG output
+ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_horizontal.pdf"),
+       height=3.8,width=10,units="cm")
+ggsave_cairo(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_horizontal.png"),
+             height=3.8,width=10,units="cm",dpi=600)
+
+# generate dendrogram as a separate plots
+tr <- ggtree(as.dendrogram(col_clustering),right=T,size=0.2)
+ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_tree_horizontal_channels.pdf"),width=1,height=10,units="cm")
+tr <- ggtree(as.dendrogram(row_clustering),right=T,size=0.2)
+ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_tree_horizontal_treatments.pdf"),width=1,height=3,units="cm")
+
+# Save legend separately
+ggpubr::as_ggplot(ggpubr::get_legend(all_pert_bubble + theme(legend.direction = "vertical"), position = NULL))
+ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_control_all_cells_dot_plot_horizontal_legend.pdf"),
+       width=3,height=3.8,units="cm")
 
 # DMSO vs control -----
 
