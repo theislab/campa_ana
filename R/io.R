@@ -48,7 +48,7 @@ load_ilastik_data <- function(dirname,channels) {
 
 load_pixel_clustering <- function(dirname,filename) {
   mapobject_ids <- np$load(file.path(dirname,"obj_ids.npy"))
-  cluster_ids <- np$load(file.path(dirname,filename))
+  cluster_ids <- np$load(file.path(dirname,filename),allow_pickle = TRUE)
   x <- np$load(file.path(dirname,"x.npy"))
   y <- np$load(file.path(dirname,"y.npy"))
   
