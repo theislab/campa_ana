@@ -17,7 +17,7 @@ For the main documentation and tutorials, see the official [CAMPA documentation]
 
 ## Data
 CSL-derived features from the 184A1 and the HeLa datasets are available [here](https://doi.org/10.6084/m9.figshare.19699651).
-Data and pre-trained models are available in the following Zenodo repositories: 
+Data and pre-trained models will be available upon acceptance of our manuscript here: 
     - Data: https://doi.org/10.5281/zenodo.7299516
     - Pre-trained models: https://doi.org/10.5281/zenodo.7299750 
     
