@@ -91,6 +91,7 @@ Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA pa
     - Figure 4 (cell-cycle dependent pixel clustering)
         - `figure_notebooks/fig1_suppl_umap_cluster_size_cell_cycle.ipynb`
         - `R/plot_example_184A1_control_cells.R`
+        - `R/fit_mixed_models_cell_cycle.R` and `R/make_bubble_plots_cell_cycle.R`
     - Figure 5 (details of cVAE clustering)
         - a: `R/cluster_loadings_184A1.R`
         - b-e:
