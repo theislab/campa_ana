@@ -94,6 +94,36 @@ variable_config = [
             },
         },
     },
+    # conditional model with 5x5 neighborhood
+    {
+        'experiment': {'name': 'CondVAE_pert-CC_neigh5'},
+        'data': {
+            'dataset_name': '184A1_all_frac0005_neigh5_cond_pert-CC',
+        },
+        'model': {
+            'model_cls': ModelEnum.VAEModel,
+            'model_kwargs': {
+                'num_neighbors': 5,
+                'num_conditions': 14,
+                'encode_condition': [10,10],
+            },
+        },
+    },
+    # conditional model with 7x7 neighborhood
+    {
+        'experiment': {'name': 'CondVAE_pert-CC_neigh7'},
+        'data': {
+            'dataset_name': '184A1_all_frac0005_neigh7_cond_pert-CC',
+        },
+        'model': {
+            'model_cls': ModelEnum.VAEModel,
+            'model_kwargs': {
+                'num_neighbors': 7,
+                'num_conditions': 14,
+                'encode_condition': [10,10],
+            },
+        },
+    },
     # MPPleiden model (non-trainable)
     {
         'experiment': {'name': 'MPPleiden'},

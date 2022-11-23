@@ -13,25 +13,15 @@ For the main documentation and tutorials, see the official [CAMPA documentation]
   cd campa_ana
   pip install .
   ```
-- get data + models
-- update `campa.ini` to point to data and experiment folders, 
-  and add [NascentRNA](https://github.com/theislab/campa_ana/blob/main/NascentRNA_constants.py) `data_config`.
-  The `campa.ini` used to generate this data looked as follows:
-  ```
-  [DEFAULT]
-  data_dir = <path-to-data>
-  experiment_dir = <path-to-experiments>
-
-  [data]
-  NascentRNA = <path-to-campa_ana>/NascentRNA_constants.py
-
-  [co_occ]
-  co_occ_chunk_size = 1e7
-  ```
+- update `campa.ini` and download data by executing [00_setup_and_download_data.ipynb](workflow/00_setup_and_download_data.ipynb)
 
 ## Data
 CSL-derived features from the 184A1 and the HeLa datasets are available [here](https://doi.org/10.6084/m9.figshare.19699651).
-Data and pre-trained models are available upon request. 
+Data and pre-trained models will be available upon acceptance of our manuscript here: 
+    - Data: https://doi.org/10.5281/zenodo.7299516
+    - Pre-trained models: https://doi.org/10.5281/zenodo.7299750 
+    
+See [00_setup_and_download_data](workflow/00_setup_and_download_data.ipynb) for more information on the provided data. 
 
 ## Structure of this repository
 - `campa_ana`: useful python functions
@@ -45,6 +35,7 @@ Data and pre-trained models are available upon request.
 
 ## Reproducing results
 Notebooks in `workflow` reproduce our results. 
+- `00_setup_and_download_data`: start here for setup and downloading provided data
 - `01_prepare_data`: download data from TissueMaps and preprocess metadata files
 - `02_create_dataset`: create datasets for training and validation of cVAE models
 - `03_train`: train cVAE models
@@ -57,44 +48,45 @@ For more information on how to use CAMPA and different configuration options for
 Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA paper.
 
 - Figure 1
-    - c,d: `R/whole_nucleus_fold_change.R`
-    - e,f,g,h: `figure_notebooks/fig1_umap_linear_classifier.ipynb`
+    - d: `R/whole_nucleus_fold_change.R`
+    - f,g,h,i: `figure_notebooks/fig1_umap_linear_classifier.ipynb`
 - Figure 2
-    - a:
+    - a: `figure_notebooks/fig1_umap_linear_classifier.ipynb`
     - b,d-i: `R/plot_example_184A1_control_cells.R`
     - c: `R/cluster_loadings_184A1.R`
 - Figure 3
-    - a,b: `R/fit_mixed_models.R` and `R/make_bubble_plots.R`
-    - c-f: `R/plot_example_184A1_meayamycin_cell.R`
-    - h,i: `R/plot_co_occurrence_184A1.R`
+    - a: `R/fit_mixed_models.R` and `R/make_bubble_plots.R`
+    - b-e: `R/plot_example_184A1_meayamycin_cell.R`
+    - g,h: `R/plot_co_occurrence_184A1.R`
 - Figure 4
-    - a-g: `figure_notebooks/fig4_perturbation_comparison.ipynb`
-    - h,i: `R/plot_co_occurrence_184A1.R`
-    - j: `figure_notebooks/fig4_object_features_CX4561.ipynb`
-    - k: `R/plot_example_184A1_cx5461_cell.R`
+    - a-f: `figure_notebooks/fig4_perturbation_comparison.ipynb`
+    - g,h: `R/plot_co_occurrence_184A1.R`
+    - i: `figure_notebooks/fig4_object_features_CX4561.ipynb`
+    - j: `R/plot_example_184A1_cx5461_cell.R`
 - Figure 5
     - a,c: `R/plot_example_SBF2_cells.R`
     - b: `R/cluster_loadings_SBF2.R`
     - d: `R/fit_mixed_models_SBF2.R` and `R/make_bubble_plots_SBF2.R`
     - e-h: `R/plot_object_stats_SBF2.R`
 - Figure 6
-    - b-c: `R/fit_mixed_model_EU_bin.R` and `R/make_bubble_plots_EU_bin.R`
-    - d-f: `R/plot_trends_and_examples_EU_heterogeneity.R`
+    - b-c: `R/plot_trends_and_examples_EU_heterogeneity.R`
 
 - Supplements:
     - Figure 1: N/A
     - Figure 2 (noise robustness)
-        - a: `figure_notebooks/fig1_suppl_noise_robustness.ipynb`
+        - a,d: `figure_notebooks/fig1_suppl_noise_robustness.ipynb`
         - b,c: `figure_notebooks/fig1_suppl_cluster_subsampling.ipynb`
     - Figure 3 (perturbation dependent pixel clustering)
         - `figure_notebooks/fig1_umap_linear_classifier.ipynb`
     - Figure 4 (cell-cycle dependent pixel clustering)
-        - `figure_notebooks/fig1_suppl_umap_cluster_size_cell_cycle.ipynb`
-        - `R/plot_example_184A1_control_cells.R`
-        - `R/fit_mixed_models_cell_cycle.R` and `R/make_bubble_plots_cell_cycle.R`
+        - a: `R/fit_mixed_models_cell_cycle.R` and `R/make_bubble_plots_cell_cycle.R`
+        - b-c: `R/plot_example_184A1_control_cells.R`
+        - d-i: `figure_notebooks/fig1_suppl_umap_cluster_size_cell_cycle.ipynb`
     - Figure 5 (details of cVAE clustering)
         - a: `R/cluster_loadings_184A1.R`
-        - b-e:
+        - b: `figure_notebooks/fig2_fig5_suppl_annotation_HPA.ipynb`
+        - c: `figure_notebooks/fig1_distribution_of_clusters_in_perturbation.ipynb`
+        - d-e: `figure_notebooks/fig1_suppl_saliency_to_latent.ipynb`
     - Figure 6 (ilastik comparison)
         - `R/compare_CSL_with_ilastik.R`
     - Figure 7 (comparison with direct clustering)
@@ -114,8 +106,9 @@ Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA pa
     - Figure 12 (cluster loadings SBF2)
         - a: `R/cluster_loadings_SBF2.R`
         - b: `R/plot_example_SBF2_cells_raw_csl.R`
-        - c/d/e:
-    - Figure 13 
+        - c: `figure_notebooks/fig2_fig5_suppl_annotation_HPA.ipynb`
+        - d-e: `figure_notebooks/fig5_suppl_184A1-model-on-HeLa-data.ipynb`
+    - Figure 13 (intensity changes in HeLa cells)
         - `R/fit_mixed_models_SBF2.R` and `R/make_bubble_plots_SBF2.R`
         - `R/fit_mixed_models_SBF2_raw_csl.R` and `R/make_bubble_plots_SBF2_raw_csl.R`
         - `R/plot_object_stats_SBF2.R`
@@ -123,5 +116,7 @@ Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA pa
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
     - Figure 15 (object filtering: example cells)
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
-    - Figure 16 (heterogeneity of PML bodies)
-        - `figure_notebooks/fig6_pml_umap.ipynb`
+    - Figure 16 (supplements to Figure 6)
+        - a-c: `R/fit_mixed_model_EU_bin.R` and `R/make_bubble_plots_EU_bin.R`
+        - d: `figure_notebooks/fig6_pml_umap.ipynb`
+       

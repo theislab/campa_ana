@@ -11,10 +11,10 @@
 
 # set up
 source ~/.bashrc
-conda activate pelkmans-3.9
+conda activate campa
 
 # run script
-
+BASE=/home/icb/hannah.spitzer/projects/pelkmans/software_new
 # calculate features for VAE_all experiment according to feature_params_all.py
 campa extract_features $BASE/campa_ana/params/feature_params_all.py
 # calculate features for VAE_SBF2 experiment according to feature_params_SBF2.py
