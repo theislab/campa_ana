@@ -15,11 +15,30 @@ conda activate campa
 
 # VAE_all experiment
 # project clustering
+# CondVAE
 campa cluster VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res0.5"
+# CondVAE with HeLa data
+#campa cluster VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir aggregated_HeLa/full_data --cluster-name "clustering_res0.5" --data-dir 'HeLa_SBF2/K18'
+#campa cluster VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir aggregated_HeLa/full_data --cluster-name "clustering_res0.5" --data-dir 'HeLa_SBF2/L19'
+#campa cluster VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir aggregated_HeLa/full_data --cluster-name "clustering_res0.5" --data-dir 'HeLa_SBF2/M18'
+#campa cluster VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir aggregated_HeLa/full_data --cluster-name "clustering_res0.5" --data-dir 'HeLa_scrambled/K19' 
+#campa cluster VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir aggregated_HeLa/full_data --cluster-name "clustering_res0.5" --data-dir 'HeLa_scrambled/L18' 
+#campa cluster VAE_all/CondVAE_pert-CC project aggregated/sub-0.001 --save-dir aggregated_HeLa/full_data --cluster-name "clustering_res0.5" --data-dir 'HeLa_scrambled/M19'
 
+# VAE
+#campa cluster VAE_all/VAE project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res0.5"
+# MPPleiden
+#campa cluster VAE_all/MPPleiden project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res0.2"
+#campa cluster VAE_all/MPPleiden project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res0.4"
+#campa cluster VAE_all/MPPleiden project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res0.6"
+#campa cluster VAE_all/MPPleiden project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res0.8"
+#campa cluster VAE_all/MPPleiden project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res1.2"
+#campa cluster VAE_all/MPPleiden project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res1.6"
+#campa cluster VAE_all/MPPleiden project aggregated/sub-0.001 --save-dir aggregated/full_data --cluster-name "clustering_res2.0"
 
 # VAE_SBF2 experiment
 # project clustering
-#campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed1"
-#campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed2"
-#campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed3"
+campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed1"
+campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed2"
+campa cluster VAE_SBF2/CondVAE_siRNA-CC project aggregated/sub-0.005_sub-0.33 --save-dir aggregated/full_data --cluster-name "clustering_res0.9_sub-0.33_seed3"
+
