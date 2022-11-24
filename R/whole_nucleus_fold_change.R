@@ -12,7 +12,7 @@ experiment_name <- "VAE_all/CondVAE_pert-CC"
 # setup python environment and experiment-specific parameters
 library(reticulate)
 reticulate::use_condaenv("pelkmans-3.9")
-campa <- import("campa")
+#campa <- import("campa")
 campa_ana <- import("campa_ana")
 
 # load required R functions from the campa_ana package
@@ -54,14 +54,20 @@ campa_res <- selected_wells %>%
   select(-well_name) %>%
   unnest(model_res)
 
+# load additional data (EU)
+cell_features <- read_csv(file=file.path(campa_ana$constants$SOURCE_DIR,"additional_data","184A1_cell_features.csv"))
+
 # keep whole nucleus mean intensities (in "all" CSL)
 whole_nucleus_intensities <- campa_res %>%
-  filter(cluster=="all") %>%
+  filter(cluster=="all") %>% 
+  inner_join(cell_features, by = c("mapobject_id", "well_name")) %>%
+  rename(`00_EU`=Nuclei_Intensity_mean_00_EU) %>%
+  select(-Intensity_sum_22_SE) %>%
   pivot_longer(matches("^\\d{2}_"),names_to="channel",values_to="intensity") 
 
-# count nuclei with zero intensity
+# find small number of nuclei with zero EU intensity (these are omitted)
 whole_nucleus_intensities %>%
-  filter(intensity <= 0) %>%
+  filter(intensity <= 0) %>% 
   nrow()
 
 # Calculate fold changes ----
@@ -69,7 +75,7 @@ whole_nucleus_intensities %>%
 whole_nucleus_intensity_fold_changes <- map_dfr(
   unique(whole_nucleus_intensities$channel),
   ~fit_mixed_model(
-    dat = whole_nucleus_intensities,
+    dat = filter(whole_nucleus_intensities,intensity > 0),
     var = intensity,
     channel_name = .,
     transform = "log",
@@ -198,7 +204,7 @@ ggsave(filename = file.path(plot_dir,"whole_nucleus_all_perturbations_comp_contr
 whole_nucleus_intensity_fold_changes_dmso_vs_control <- map_dfr(
   unique(whole_nucleus_intensities$channel),
   ~fit_mixed_model(
-    dat = whole_nucleus_intensities %>% 
+    dat = filter(whole_nucleus_intensities,intensity > 0) %>% 
       filter(treatment=="Control") %>%
       select(-treatment) %>%
       mutate(treatment=if_else(perturbation_duration=="normal","Untreated","DMSO")),
