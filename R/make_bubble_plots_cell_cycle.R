@@ -285,14 +285,14 @@ to_plot <- fold_changes_to_plot %>%
   filter(cluster=="Whole nucleus" & comparison=="unnormalised")
 cols <- hclust_cols_cell_cycle(to_plot)
 
-make_bubble_plot(fold_changes = to_plot,
+whole_nucleus_plot <- make_bubble_plot(fold_changes = to_plot,
                    plot_var = log2_fold_change,
                    col_var = channel_name,
                    row_var = cell_cycle,
                    col_order=cols,
                    row_order=c("G2","S"),
-                   color_limits=c(-1,1))
+                   color_limits=c(-1,1)) + xlab("Channel")
 
-ggsave(plot = combined_plot,filename = file.path(plot_dir,paste0("whole_nucleus_dot_plot_cell_cycle.pdf")),width=10,height=4,units="cm")
-ggsave_cairo(plot = combined_plot,filename = file.path(plot_dir,paste0("whole_nucleus_dot_plot_cell_cycle.png")),width=10,height=4,units="cm",dpi=600)
+ggsave(plot = whole_nucleus_plot,filename = file.path(plot_dir,paste0("whole_nucleus_dot_plot_cell_cycle.pdf")),width=10,height=4,units="cm")
+ggsave_cairo(plot = whole_nucleus_plot,filename = file.path(plot_dir,paste0("whole_nucleus_dot_plot_cell_cycle.png")),width=10,height=4,units="cm",dpi=600)
 
