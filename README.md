@@ -71,52 +71,55 @@ Notebooks in `figure_notebooks` and `R` reproduce figure panels for the CAMPA pa
 - Figure 6
     - b-c: `R/plot_trends_and_examples_EU_heterogeneity.R`
 
-- Supplements:
+- Extended Data Figures:
     - Figure 1: N/A
-    - Figure 2 (noise robustness)
-        - a,d: `figure_notebooks/fig1_suppl_noise_robustness.ipynb`
-        - b,c: `figure_notebooks/fig1_suppl_cluster_subsampling.ipynb`
-    - Figure 3 (perturbation dependent pixel clustering)
+    - Figure 2 (perturbation dependent pixel clustering)
         - `figure_notebooks/fig1_umap_linear_classifier.ipynb`
-    - Figure 4 (cell-cycle dependent pixel clustering)
+    - Figure 3 (cell-cycle dependent pixel clustering)
         - a: `R/fit_mixed_models_cell_cycle.R` and `R/make_bubble_plots_cell_cycle.R`
         - b-c: `R/plot_example_184A1_control_cells.R`
         - d-i: `figure_notebooks/fig1_suppl_umap_cluster_size_cell_cycle.ipynb`
-    - Figure 5 (details of cVAE clustering)
+    - Figure 4 (details of cVAE clustering)
         - a: `R/cluster_loadings_184A1.R`
         - b: `figure_notebooks/fig2_fig5_suppl_annotation_HPA.ipynb`
         - c: `figure_notebooks/fig1_distribution_of_clusters_in_perturbation.ipynb`
         - d-e: `figure_notebooks/fig1_suppl_saliency_to_latent.ipynb`
-    - Figure 6 (ilastik comparison)
+    - Figure 5 (ilastik comparison)
         - `R/compare_CSL_with_ilastik.R`
-    - Figure 7 (comparison with direct clustering)
+    - Figure 6 (comparison with direct clustering)
         - a,b: `R/cluster_loadings_direct_184A1.R`
         - c: `R/plot_example_184A1_TSA_cell_direct.R`
         - d: `R/plot_example_184A1_TSA_cell.R`
         - e: `R/fit_mixed_models.R` and `R/make_bubble_plots.R`
-    - Figure 8 (bubble-plots)
-        - `R/fit_mixed_models.R` and `R/make_bubble_plots.R`
-        - `R/fit_mixed_models_DMSO.R` and `R/make_bubble_plots_DMSO.R`
-    - Figure 9 (co-occurrence 184A1)
+    - Figure 7 (co-occurrence 184A1)
         - `R/plot_co_occurrence_184A1.R`
-    - Figure 10 (co-occurrence 184A1)
-        - `R/plot_co_occurrence_184A1.R`
-    - Figure 11 (UMAP outliers)
-        - `figure_notebooks/fig4_suppl_UMAP_outliers.ipynb`
-    - Figure 12 (cluster loadings SBF2)
+    - Figure 8 (cluster loadings SBF2)
         - a: `R/cluster_loadings_SBF2.R`
         - b: `R/plot_example_SBF2_cells_raw_csl.R`
         - c: `figure_notebooks/fig2_fig5_suppl_annotation_HPA.ipynb`
         - d-e: `figure_notebooks/fig5_suppl_184A1-model-on-HeLa-data.ipynb`
-    - Figure 13 (intensity changes in HeLa cells)
+    - Figure 9 (supplements to Figure 6)
+        - a-c: `R/fit_mixed_model_EU_bin.R` and `R/make_bubble_plots_EU_bin.R`
+        - d: `figure_notebooks/fig6_pml_umap.ipynb`
+
+- Supplements:
+    - Figure 1 (noise robustness)
+        - a,d: `figure_notebooks/fig1_suppl_noise_robustness.ipynb`
+        - b,c: `figure_notebooks/fig1_suppl_cluster_subsampling.ipynb`
+    - Figure 2 (bubble-plots)
+        - `R/fit_mixed_models.R` and `R/make_bubble_plots.R`
+        - `R/fit_mixed_models_DMSO.R` and `R/make_bubble_plots_DMSO.R`
+    - Figure 3 (co-occurrence 184A1)
+        - `R/plot_co_occurrence_184A1.R`
+    - Figure 4 (UMAP outliers)
+        - `figure_notebooks/fig4_suppl_UMAP_outliers.ipynb`
+    - Figure 5 (intensity changes in HeLa cells)
         - `R/fit_mixed_models_SBF2.R` and `R/make_bubble_plots_SBF2.R`
         - `R/fit_mixed_models_SBF2_raw_csl.R` and `R/make_bubble_plots_SBF2_raw_csl.R`
         - `R/plot_object_stats_SBF2.R`
-    - Figure 14 (object filtering: scatter plots)
+    - Figure 6 (object filtering: scatter plots)
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
-    - Figure 15 (object filtering: example cells)
+    - Figure 7 (object filtering: example cells)
         - `figure_notebooks/fig5_object_features_SBF2.ipynb`
-    - Figure 16 (supplements to Figure 6)
-        - a-c: `R/fit_mixed_model_EU_bin.R` and `R/make_bubble_plots_EU_bin.R`
-        - d: `figure_notebooks/fig6_pml_umap.ipynb`
+
        
