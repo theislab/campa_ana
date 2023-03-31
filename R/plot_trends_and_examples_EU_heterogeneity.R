@@ -116,6 +116,13 @@ bootstrap_cor_ci <- function(x,y) {
   return(tibble(lower = ci$percent[4],upper = ci$percent[5]))
 }
 
+bootstrap_cor_all <- function(x,y) {
+  out <- boot(data = data.frame(x,y),
+              R = 500,
+              statistic = function(dat, idx) cor(dat[idx,"x"],dat[idx,"y"]))
+  return(tibble(cor = out$t))
+}
+
 all_data_EU_trend <- campa_res %>%
   filter(cluster  %in% c("PML bodies")) %>%
   select(matches("PML|SP100|mapobject_id$|Nuclei_Intensity_mean_00_EU")) %>%
@@ -194,6 +201,14 @@ combined_plot
 ggsave(plot = combined_plot, filename = file.path(plot_dir,"PML_SP100_trend_EU.pdf"),width=5.5,height=3.8,units="cm")
 ggsave_cairo(plot = combined_plot, filename = file.path(plot_dir,"PML_SP100_trend_EU.png"),width=5.5,height=3.8,units="cm",dpi=600)
 
+
+combined_plot <- p_counts / (p_trends +  
+                               scale_color_manual(values=c(cbPalette[3],cbPalette[8])) +
+                               scale_fill_manual(values=c(cbPalette[3],cbPalette[8]))) + plot_layout(heights = c(1,4))
+combined_plot
+ggsave(plot = combined_plot, filename = file.path(plot_dir,"PML_SP100_trend_EU_CM.pdf"),width=5.5,height=3.8,units="cm")
+ggsave_cairo(plot = combined_plot, filename = file.path(plot_dir,"PML_SP100_trend_EU_CM.png"),width=5.5,height=3.8,units="cm",dpi=600)
+
 # calculate cell cycle specific correlations with EU
 correlations_with_EU <- campa_res %>%
   filter(cluster=="PML bodies") %>%
@@ -205,7 +220,7 @@ correlations_with_EU <- campa_res %>%
             cor_SP100_EU_ci = list(bootstrap_cor_ci(`20_SP100`,Nuclei_Intensity_mean_00_EU))) %>%
   unnest(col = c(cor_PML_EU_ci,cor_SP100_EU_ci),names_sep="_")
 
-correlations_with_EU %>%
+correlations_with_EU_summary <- correlations_with_EU %>%
   pivot_longer(-cell_cycle) %>%
   mutate(channel = if_else(grepl("PML",name),"PML","SP100"),
          statistic = case_when(grepl("lower",name) ~ "lower",
@@ -213,7 +228,9 @@ correlations_with_EU %>%
                                TRUE ~ "cor")) %>%
   select(-name) %>%
   pivot_wider(names_from = statistic) %>%
-  mutate(cell_cycle = factor(cell_cycle,levels=c("G1","S","G2"))) %>%
+  mutate(cell_cycle = factor(cell_cycle,levels=c("G1","S","G2"))) 
+
+correlations_with_EU_summary %>%
   ggplot(aes(x=channel,y=cor,fill=cell_cycle)) +
   geom_col(position = position_dodge(0.7),width=0.7,col="black",size=0.2) +
   geom_errorbar(aes(ymin=lower,ymax=upper),position = position_dodge(0.7),size=0.2,width=0.2) +
@@ -231,6 +248,41 @@ correlations_with_EU %>%
         legend.margin = margin(-4,0,-4,-4),
         legend.direction = "vertical")
 ggsave(file.path(plot_dir,"PML_SP100_EU_barplot.pdf"),width=3.5,height=3,units="cm")
+
+# show distributions of bootstraps
+correlations_with_EU_all <- campa_res %>%
+  filter(cluster=="PML bodies") %>%
+  select(mapobject_id,`11_PML`,`20_SP100`,Nuclei_Intensity_mean_00_EU,cell_cycle) %>%
+  group_by(cell_cycle) %>%
+  group_by(cell_cycle) %>%
+  summarise(cor_PML_EU_all = list(bootstrap_cor_all(`11_PML`,Nuclei_Intensity_mean_00_EU)),
+            cor_SP100_EU_all = list(bootstrap_cor_all(`20_SP100`,Nuclei_Intensity_mean_00_EU))) %>%
+  unnest(col = c(cor_PML_EU_all,cor_SP100_EU_all),names_sep="_")
+
+correlations_with_EU_all %>%
+  pivot_longer(-cell_cycle,values_to="cor") %>%
+  mutate(channel = if_else(grepl("PML",name),"PML","SP100")) %>%
+  select(-name) %>%
+  mutate(cell_cycle = factor(cell_cycle,levels=c("G1","S","G2"))) %>%
+  ggplot(aes(x=channel,y=cor,fill=cell_cycle)) +
+  geom_violin(position = position_dodge(0.7),width=0.7,col="black",size=0.2) +
+  geom_point(data=correlations_with_EU_summary,aes(y=cor),position = position_dodge(0.7),col="black",size=0.2) +
+  geom_errorbar(data=correlations_with_EU_summary,aes(ymin=lower,ymax=upper),position = position_dodge(0.7),size=0.3,width=0.5) +
+  geom_hline(yintercept=0,size=0.2) +
+  scale_y_continuous("Correlation with EU",limits=c(-.5,.5),breaks=c(-.4,0,.4)) +
+  scale_fill_brewer(name="Cell cycle\nstage", palette = "Greys") +
+  theme_bw(base_size = 7) +
+  #ggtitle("PML bodies") +
+  theme(panel.grid = element_blank(),
+        axis.title.x = element_blank(),
+        legend.title = element_text(size=6),
+        #axis.text.x = element_text(angle=90,hjust=1,vjust=0.5),
+        legend.key.size = unit(2,"mm"),
+        legend.position = "right",
+        legend.margin = margin(-4,0,-4,-4),
+        legend.direction = "vertical")
+ggsave(file.path(plot_dir,"PML_SP100_EU_violin_plot.pdf"),width=4.2,height=3,units="cm")
+
 
 # Example cells ----
 

@@ -151,7 +151,7 @@ size_fold_changes_to_plot <- size_fold_changes_full %>%
   group_by(cluster,channel,EU_bin) %>%
   filter(p.value==max(p.value)) %>%
   ungroup() %>%
-  bind_rows(filter(intensity_fold_changes_full,!(cluster == "all"))) %>%
+  bind_rows(filter(size_fold_changes_full,!(cluster == "all"))) %>%
   mutate(EU_bin = str_remove(EU_bin," - lower"),
          cluster = str_remove(cluster," - all")) %>%
   left_join(rename(rename_channels_for_plotting_dict,channel_name=new),
@@ -231,6 +231,8 @@ combined_plot <- (
 ) + 
   plot_layout(widths=c(1,21))
 combined_plot
+
+sizes_to_plot
 
 ggsave(plot = combined_plot,filename = file.path(plot_dir,paste0("unnormalised_dot_plot_EU_bin.pdf")),width=14,height=5.5,units="cm")
 ggsave_cairo(plot = combined_plot,filename = file.path(plot_dir,paste0("unnormalised_dot_plot_EU_bin.png")),width=14,height=5.5,units="cm",dpi=600)
