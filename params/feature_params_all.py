@@ -85,14 +85,3 @@ for res in [1.2]:  #[0.2, 0.4, 0.6, 0.8, 1.2, 1.6, 2.0]:
             'force': True,
         }
     )
-
-# intensity features + object stats for VAE
-variable_feature_params.append(
-    {
-        'experiment_dir': 'VAE_all/VAE',
-        'cluster_name': "clustering_res0.5",
-        'save_name': 'features_clustering_res0.5.h5ad',
-        'features': ['intensity', 'object_stats'],
-        'force': True,
-    }
-)
